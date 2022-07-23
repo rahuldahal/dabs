@@ -1,0 +1,40 @@
+#full{
+    width: 100%;
+    height: auto;
+}
+
+#inner_full{
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+#header{
+    width: 100%;
+    height: 50px;
+    background-color: blue;
+    color: white;
+}
+
+#body{
+    width: 100%;
+    height: 400px;
+}
+
+#footer{
+    width: 100%;
+    height: 50px;
+    background-color: blue;
+    color: white;
+}
+
+.label{
+    width: 200px;
+    height: 70px;
+}
+
+.formInput{
+    width: 180px;
+    height: 30px;
+    border-radius: 10px;
+}
