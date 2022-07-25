@@ -1,49 +1,92 @@
 <?php
-include('includes/connection.php');
+include(dirname(__DIR__).'/dabs/includes/connection.php');
 ?>
 
+<!DOCTYPE html>
 <html>
-
 <head>
-    <title>Admin Login</title>
-    <link rel="stylesheet" type="text/css" href="css/s1.css">
+	<title>Doctor's Appoint Booking Management System</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,500,700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div id="full">
-        <div id="inner_full">
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
 
-            <div id="header">
-                <h2 align="center">Doctor's Appointment Booking System</h2>
-            </div>
+			<div class="signin">
+				<form>
+					<label class="signinTitle" for="chk" aria-hidden="true">Sign In</label>
+					<div class="fields">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="name@domain.com" required>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="password" required>
+                        <input type="submit" name="patientSigninDetails" value="Sign In" />
+                    </div>
+				</form>
+			</div>
+    
+    <div class="signup">
+				<form>
+					<label class="signupTitle" for="chk" aria-hidden="true">Sign Up</label>
 
-            <div id="body">
-                <form action="" method="POST">
-                    <table align="center">
-                        <tr>
-                            <td class="label"><label for="userName"> Username</label></td>
-                            <td class="label"><input type="text" name="userName" id="userName" placeholder="Enter Username" class="formInput"></td>
-                        </tr>
+					<div class="fields multiStepForm">
+                        <div class="steps">
+                        <div data-step="one">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Saloni" required />
+                            
+                            <label for="middleName">Middle Name</label>
+                            <input type="text" id="middleName" name="middleName" placeholder="Saloni" required />
 
-                        <tr>
-                            <td class="label"><label for="password"></label>Password</td>
-                            <td class="label"><input type="password" name="password" id="password" placeholder="Enter Password" class="formInput"></td>
-                        </tr>
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Saloni" required />
+                        </div>
 
-                        <tr>
-                            <td><input type="submit" name="submit" value="Login" style="width:80px, height:120px;"></td>
-                        </tr>
-                    </table>
-                </form>
+                        <div data-step="two">
+                            <label for="gender">Gender</label>
+                            <select name="gender" id="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Others</option>
+                            </select>
 
-            </div>
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" name="dob" id="dob" />
 
-            <div id="footer">
-                <h4 align="center">Copyright@myproject2022</h4>
-            </div>
-        </div>
-    </div>
+                            <label for="bloodGroup">Blood Group</label>
+                            <select name="bloodGroup" id="bloodGroup">
+                                <!-- TODO: add blood group options -->
+                                <option value="A+">Male</option>
+                                <option value="A-">Female</option>
+                                <option value="B+">Others</option>
+                            </select>
 
+                            <label for="maritalStatus">Marital Status</label>
+                            <select name="maritalStatus" id="maritalStatus">
+                                <!-- TODO: add marital status options -->
+                                <option value="A+">Male</option>
+                                <option value="A-">Female</option>
+                                <option value="B+">Others</option>
+                            </select>
+                        </div>
+
+                        <div data-step="three">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="name@domain.com" required>
+
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="password" required />
+                        </div>
+                        </div>
+
+                        <button data-button-action="previous">Previous</button>
+                        <button data-button-action="next">Next</button>
+
+                        <input hidden type="submit" name="patientSignupDetails" value="Sign Up" />
+                    </div>
+				</form>
+			</div>
+	</div>
 </body>
-
 </html>

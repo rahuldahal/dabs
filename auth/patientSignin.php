@@ -1,7 +1,7 @@
 <?php
-include('../includes/connection.php');
-include('../constants/regex.php');
-include('../constants/validation.php');
+include(dirname(__DIR__).'/includes/connection.php');
+include(dirname(__DIR__).'/constants/regex.php');
+include(dirname(__DIR__).'/constants/validation.php');
 
 if (!isset($_POST["patientSigninDetails"])) {
     die($errorMessages["emptyData"]);
