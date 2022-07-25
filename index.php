@@ -1,5 +1,5 @@
 <?php
-include('includes/connection.php');
+include(dirname(__DIR__).'/dabs/includes/connection.php');
 ?>
 
 <html>
