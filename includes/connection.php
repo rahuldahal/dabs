@@ -1,5 +1,5 @@
 <?php
-include('constants/db.php');
+include('../constants/db.php');
 
 $conn = mysqli_connect("localhost", "root", "", $db['name']);
 

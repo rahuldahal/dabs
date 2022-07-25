@@ -1,6 +1,8 @@
 <?php
-include('../constants/regex.php');
+include('../includes/connection.php');
+include('../constants/db.php');
 include('../constants/enums.php');
+include('../constants/regex.php');
 include('../constants/validation.php');
 
 $errors = array();
@@ -112,5 +114,30 @@ if (count($errors) > 0) {
     print_r($errors);
     exit();
 }
-
+else{
+    print_r($patientsDetails);
+}
 // Run using insert queries 
+
+$firstName= $patientsDetails['firstName'];
+$middleName= $patientsDetails['middleName'];
+$lastName= $patientsDetails['lastName'];
+$email= $patientsDetails['email'];
+$dob= $patientsDetails['dob'];
+$gender= $patientsDetails['gender'];
+$maritalStatus = $patientsDetails['maritalStatus'];
+$bloodGroup= $patientsDetails['bloodGroup'];
+$password= $patientsDetails['password'];
+$hashedPassword = md5($password);
+$role= "patient";
+$photo= $defaultValues['photo'].$firstName."+".$lastName;
+
+$sql= "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo) VALUES ('$firstName',
+'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo')";
+$resultSet= mysqli_query($conn, $sql);
+$affectedRows= mysqli_affected_rows($conn);
+if($affectedRows>0){
+    echo "Successfully Inserted";
+}
+
+mysqli_close($conn);
