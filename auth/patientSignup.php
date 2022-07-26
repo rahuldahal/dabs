@@ -4,6 +4,7 @@ include(dirname(__DIR__).'/constants/db.php');
 include(dirname(__DIR__).'/constants/enums.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
+session_start();
 
 $errors = array();
 
@@ -138,6 +139,10 @@ $resultSet= mysqli_query($conn, $sql);
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows>0){
     echo "Successfully Inserted";
+    $userDetails = ["firstName" => $firstName, "email" => $email];
+    $_SESSION['userDetails']= $userDetails;
+    header('Location: /dabs/views/dashboard.php');
+    exit();
 }
 
 mysqli_close($conn);

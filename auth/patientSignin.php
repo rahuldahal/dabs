@@ -1,4 +1,5 @@
 <?php
+session_start();
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
@@ -23,11 +24,15 @@ if (!$isEmailValid) {
     die($errorMessages['notEmail']);
 }
 
-$sql= "SELECT * FROM user WHERE email='$email' AND password='$hashedPassword'";
+$sql= "SELECT firstName FROM user WHERE email='$email' AND password='$hashedPassword'";
 $resultSet= mysqli_query($conn, $sql);
 $numRows= mysqli_num_rows($resultSet);
 if($numRows>0){
-    echo "authenticated"; // dashboard maa redirect garne ani dashboard maa cokkie session use garne
+    $row = mysqli_fetch_assoc($resultSet);
+    $_SESSION['firstName']= $row['firstName'];
+    $_SESSION['email']= $email;
+    header('Location: /dabs/views/dashboard.php');
+    exit();
 }
 
 mysqli_close($conn);

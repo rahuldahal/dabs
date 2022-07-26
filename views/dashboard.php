@@ -1,11 +1,16 @@
 <?php
 include(dirname(__DIR__)."/includes/header.php");
+session_start();
+if(count($_SESSION)==0){
+  header('Location: /dabs/index.php');
+  exit();
+}
 ?>
 
 <title>Dashboard</title>
 </head>
 <body>
-<h1>Patient name's Dashboard</h1>
+<h1><?php echo $_SESSION['firstName']."'s"; ?> Dashboard</h1>
 
 <div class="tabs">
   <div class="tab-2">

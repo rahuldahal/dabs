@@ -14,7 +14,7 @@ include(dirname(__DIR__).'/dabs/includes/connection.php');
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signin">
-				<form>
+				<form action="auth/patientSignin.php" method="POST">
 					<label class="signinTitle" for="chk" aria-hidden="true">Sign In</label>
 					<div class="fields">
                         <label for="email">Email</label>
@@ -27,7 +27,7 @@ include(dirname(__DIR__).'/dabs/includes/connection.php');
 			</div>
     
     <div class="signup">
-				<form>
+				<form action="auth/patientSignup.php" method="POST">
 					<label class="signupTitle" for="chk" aria-hidden="true">Sign Up</label>
 
 					<div class="fields multiStepForm">
@@ -56,18 +56,21 @@ include(dirname(__DIR__).'/dabs/includes/connection.php');
 
                             <label for="bloodGroup">Blood Group</label>
                             <select name="bloodGroup" id="bloodGroup">
-                                <!-- TODO: add blood group options -->
-                                <option value="A+">Male</option>
-                                <option value="A-">Female</option>
-                                <option value="B+">Others</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
                             </select>
 
                             <label for="maritalStatus">Marital Status</label>
                             <select name="maritalStatus" id="maritalStatus">
-                                <!-- TODO: add marital status options -->
-                                <option value="A+">Male</option>
-                                <option value="A-">Female</option>
-                                <option value="B+">Others</option>
+                                <option value="single">single</option>
+                                <option value="married">married</option>
+                                <option value="divorced">divorced</option>
                             </select>
                         </div>
 
