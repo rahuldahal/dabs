@@ -30,7 +30,7 @@ if(count($_SESSION)==0){
     <input id="tab2-2" name="tabs-two" type="radio">
     <div>
       <h4>Book a new appointment</h4>
-      <form action="">
+      <form action="createAppointment.php" method="POST">
           <label for="reason">Reason</label>
           <textarea name="reason" id="reason" cols="30" rows="10"></textarea>
           
@@ -40,6 +40,8 @@ if(count($_SESSION)==0){
               <option value="DoctorTwo">Doctor Two</option>
               <option value="DoctorThree">Doctor Three</option>
           </select>
+
+          <input type="submit" name="appointmentDetails" value="Get Appointment">
       </form>
     </div>
   </div>

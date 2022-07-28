@@ -4,7 +4,7 @@ include(dirname(__DIR__).'/constants/db.php');
 include(dirname(__DIR__).'/constants/enums.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
-session_start();
+// session_start();
 
 $errors = array();
 
@@ -29,7 +29,7 @@ function toLowerCase($values)
 {
     $lowerCasedData = array();
     foreach ($values as $key => $value) {
-        if ($key == "password" || $key == "bloodGroup") {
+        if ($key == "password" || $key == "bloodGroup" || $key == "specialization" || $key == "degree") {
             $lowerCasedData[$key] = $value;
         } else {
             $lowerCasedData[$key] = strtolower($value);
@@ -93,6 +93,14 @@ if (!$isEmailValid) {
     array_push($errors, $errorMessages['notEmail']);
 }
 
+$email = $doctorDetails['email'];
+$query = "SELECT email FROM user WHERE email= '$email';";
+$resultSet = mysqli_query($conn, $query);
+$emailExists = mysqli_num_rows($resultSet);
+if($emailExists > 0){
+    array_push($errors, $errorMessages['repeatedEmail']);
+}
+
 if (!$isDOBValid) {
     array_push($errors, "DOB " . $errorMessages['invalidDate'] . " yyyy-mm-dd!");
 }
@@ -128,3 +136,48 @@ if (count($errors) > 0) {
 else{
     print_r($doctorDetails);
 }
+
+//RUN using insert queries
+
+$firstName= $doctorDetails['firstName'];
+$middleName= $doctorDetails['middleName'];
+$lastName= $doctorDetails['lastName'];
+$email= $doctorDetails['email'];
+$dob= $doctorDetails['dob'];
+$gender= $doctorDetails['gender'];
+$maritalStatus = $doctorDetails['maritalStatus'];
+$bloodGroup= $doctorDetails['bloodGroup'];
+$specialization= $doctorDetails['specialization'];
+$degree= $doctorDetails['degree'];
+$availabilityTime= $doctorDetails['availabilityTime'];
+$password= $doctorDetails['password'];
+$hashedPassword = md5($password);
+$role= "doctor";
+$photo= $defaultValues['photo'].$firstName."+".$lastName;
+
+$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo) VALUES ('$firstName',
+'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo');";
+$resultSet1= mysqli_query($conn, $sql1);
+$affectedRows1= mysqli_affected_rows($conn);
+if($affectedRows1>0){
+    echo "Successfully Inserted Into user ";
+
+
+    $sql2= "SELECT userId FROM user WHERE email='$email'";
+    $resultSet2= mysqli_query($conn, $sql2);
+    $numRows2= mysqli_num_rows($resultSet2);
+    if($numRows2>0){
+        $row=mysqli_fetch_assoc($resultSet2);
+        $userId= $row['userId'];
+
+        $sql3 = "INSERT INTO doctor (userId, specialization, degree, availabilityTime) VALUES ('$userId',
+        '$specialization', '$degree', '$availabilityTime');";
+        $resultSet3= mysqli_query($conn, $sql3);
+        $affectedRows3= mysqli_affected_rows($conn);
+        if($affectedRows3 > 0){
+            echo " Successfully Inserted Into doctor";
+        }
+    }
+}
+
+mysqli_close($conn);
