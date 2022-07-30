@@ -49,7 +49,7 @@ if(!$isReasonValid){
     array_push($errors, "Reason " . $errorMessages['notAlpha']);
 }
 
-$isDateTimeValid= isDateTimeValid($appointmentDetails['appointmentDateAndTime']);
+$isDateTimeValid= isDateTimeValid($appointmentDetails['DateAndTime']);
 if(!$isDateTimeValid){
     array_push($errors, "Date and time " . $errorMessages['invalidDate'] . " yyyy-mm-dd hh:mm:ss!");
 }
@@ -81,7 +81,8 @@ else{
 $userId= $appointmentDetails['userId'];
 $doctorId= $appointmentDetails['doctorId'];
 $reason= $appointmentDetails['reason'];
-$dateAndTime= $appointmentDetails['appointmentDateAndTime'];
+$dateAndTime= $appointmentDetails['DateAndTime'];
+$fee= 200;
 
 $query="SELECT token FROM appointment ORDER BY userId DESC LIMIT 1;";
 $resultSet = mysqli_query($conn, $query);
@@ -92,7 +93,7 @@ if($numRows > 0){
 }
 
 ++$token;
-$sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, token) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$token');";
+$sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, token, fee) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$token', '$fee');";
 $resultSet= mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows > 0){
