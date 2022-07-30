@@ -11,7 +11,7 @@ include(dirname(__DIR__).'/includes/connection.php');
 </head>
 <body>
     <div class="signup">
-				<form action="../auth/doctorSignup.php" method="POST">
+				<form action="../admin/doctorUpdate.php" method="POST">
 					<label class="signupTitle" for="chk" aria-hidden="true">Sign Up</label>
 
 					<div class="fields multiStepForm">
@@ -65,7 +65,6 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="Pediatrician">Pediatrician</option>
                                 <option value="Neurologist">Neurologist</option>
                                 <option value="Dermatologist">Dermatologist</option>
-                                <option value="Gynecologist">Gynecologist</option>
                                 <option value="Anesthesiologist">Anesthesiologist</option>
                                 <option value="Psychiatrist">Psychiatrist</option>
                             </select>
@@ -91,7 +90,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                         <button data-button-action="previous">Previous</button>
                         <button data-button-action="next">Next</button>
 
-                        <input hidden type="submit" name="doctorSignupDetails" value="Add" />
+                        <input hidden type="submit" name="doctorUpdateDetails" value="Update" />
                     </div>
 				</form>
 			</div>

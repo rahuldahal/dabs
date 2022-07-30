@@ -1,8 +1,10 @@
 <?php
-    session_start();
-    include(dirname(__DIR__).'/includes/connection.php');
-    include(dirname(__DIR__).'/constants/regex.php');
-    include(dirname(__DIR__).'/constants/validation.php');
+include(dirname(__DIR__).'/includes/connection.php');
+include(dirname(__DIR__).'/constants/db.php');
+include(dirname(__DIR__).'/constants/enums.php');
+include(dirname(__DIR__).'/constants/regex.php');
+include(dirname(__DIR__).'/constants/validation.php');
+session_start();
 
 $errors = array();
     
@@ -57,7 +59,7 @@ $query = "SELECT userId FROM user WHERE userId= '$userId';";
 $resultSet = mysqli_query($conn, $query);
 $numRows = mysqli_num_rows($resultSet);
 if($numRows == 0){
-    array_push($errors, $userId." ".$errorMessages['notInTable']);
+    array_push($errors, "user ".$errorMessages['notInTable']);
 }
 
 $doctorId= $appointmentDetails['doctorId'];
@@ -65,7 +67,7 @@ $query1 = "SELECT doctorId FROM doctor WHERE doctorId= '$doctorId';";
 $resultSet1 = mysqli_query($conn, $query1);
 $numRows1 = mysqli_num_rows($resultSet1);
 if($numRows1 == 0){
-    array_push($errors, $userId." ".$errorMessages['notInTable']);
+    array_push($errors, "doctor ".$errorMessages['notInTable']);
 }
 
 if (count($errors) > 0) {
@@ -81,10 +83,19 @@ $doctorId= $appointmentDetails['doctorId'];
 $reason= $appointmentDetails['reason'];
 $dateAndTime= $appointmentDetails['appointmentDateAndTime'];
 
-$sql = "INSERT INTO appointment (userId, doctorId, reason, appointmentDateAndTime) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime');";
-        $resultSet= mysqli_query($conn, $sql);
-        $affectedRows= mysqli_affected_rows($conn);
-        if($affectedRows > 0){
-            echo " Successfully Inserted Into appointment";
+$query="SELECT token FROM appointment ORDER BY userId DESC LIMIT 1;";
+$resultSet = mysqli_query($conn, $query);
+$numRows = mysqli_num_rows($resultSet);
+if($numRows > 0){
+    $rows = mysqli_fetch_assoc($resultSet);
+    $token = $rows['token'];
+}
+
+++$token;
+$sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, token) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$token');";
+$resultSet= mysqli_query($conn, $sql) or die(mysqli_error($conn));
+$affectedRows= mysqli_affected_rows($conn);
+if($affectedRows > 0){
+    echo " Successfully Inserted Into appointment";
         }
 ?>

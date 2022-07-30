@@ -35,7 +35,7 @@ if($numRows>0){
     $_SESSION['firstName']= $row['firstName'];
     $_SESSION['email']= $email;
     echo $_SESSION['firstName'];
-    header('Location: /dabs/views/adminPanel.php');
+    header('Location: /dabs/views/adminDashboard.php');
     exit();
 }
 
