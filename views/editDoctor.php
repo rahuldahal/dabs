@@ -11,7 +11,7 @@ include(dirname(__DIR__).'/includes/connection.php');
 </head>
 <body>
     <div class="signup">
-				<form action="../admin/doctorUpdate.php" method="POST">
+				<form action="../admin/updateDoctor.php" method="POST">
 					<label class="signupTitle" for="chk" aria-hidden="true">Sign Up</label>
 
 					<div class="fields multiStepForm">
