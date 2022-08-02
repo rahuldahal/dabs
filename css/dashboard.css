@@ -55,8 +55,8 @@ select:focus {
   overflow: hidden;
 }
 
-.tabs [class^="tab"] label,
-.tabs [class*=" tab"] label {
+.tabs [class^="tab"] .tabLabel,
+.tabs [class*=" tab"] .tabLabel {
   color: #efedef;
   cursor: pointer;
   display: block;
@@ -130,4 +130,19 @@ select:focus {
 
 .tabs .tab-2:last-child [type="radio"]:checked + div {
   margin-left: -100%;
+}
+
+.appointmentFormFields {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .appointmentFormFields .formField {
+  width: 100%;
+} */
+
+.doctorDetails .formField {
+  margin-top: 1rem;
 }

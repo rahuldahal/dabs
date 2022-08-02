@@ -6,6 +6,17 @@
   box-sizing: border-box;
 }
 
-input[hidden]{
-  display:none !important;
+input[hidden] {
+  display: none !important;
+}
+
+label {
+  display: block;
+  width: max-content;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+textarea {
+  width: 600px;
 }

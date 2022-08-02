@@ -1,0 +1,29 @@
+.steps {
+  position: relative;
+}
+
+[data-step] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #eee;
+  transition: transform 0.3s linear;
+}
+
+[data-step="two"],
+[data-step="three"] {
+  transform: translateX(110%);
+}
+
+.toLeft {
+  transform: translateX(-110%);
+}
+
+.toRight {
+  transform: translateX(110%);
+}
+
+.activeStep {
+  transform: translateX(0);
+}
