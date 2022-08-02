@@ -29,6 +29,7 @@ $resultSet= mysqli_query($conn, $sql);
 $numRows= mysqli_num_rows($resultSet);
 if($numRows>0){
     $row = mysqli_fetch_assoc($resultSet);
+    $_SESSION['userId']= $row['userId'];
     $_SESSION['firstName']= $row['firstName'];
     $_SESSION['email']= $email;
     header('Location: /dabs/views/dashboard.php');

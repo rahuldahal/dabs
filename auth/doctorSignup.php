@@ -67,6 +67,12 @@ function isFullNameValid($firstName, $middleName, $lastName)
     return false;
 }
 
+// function isDateTimeValid($value)
+// {
+//     global $regex;
+//     return (preg_match($regex["yyyy-mm-dd hh:mm:ss"], $value));
+// }
+
 function isPasswordValid($value)
 {
     global $regex;
@@ -84,6 +90,11 @@ $isMaritalStatusValid = in_array($doctorDetails['maritalStatus'], $maritalStatus
 $isSpecializationValid = in_array($doctorDetails['specialization'], $specialization);
 $isDegreeValid = in_array($doctorDetails['degree'], $degree);
 $isPasswordValid = isPasswordValid($doctorDetails['password']);
+// $isDateTimeValid= isDateTimeValid($doctorDetails['availabilityTime']);
+
+// if(!$isDateTimeValid){
+//     array_push($errors, "Date and time " . $errorMessages['invalidDate'] . " yyyy-mm-dd hh:mm:ss!");
+// }
 
 if (!$isFullNameValid) {
     array_push($errors, "Name " . $errorMessages['notAlpha']);
@@ -128,6 +139,8 @@ if (!$isDegreeValid) {
 if (!$isPasswordValid) {
     array_push($errors, $errorMessages['weakPassword']);
 }
+
+
 
 if (count($errors) > 0) {
     print_r($errors);

@@ -53,7 +53,8 @@ input {
 }
 
 .signup {
-  height: 460px;
+  margin-top: 100px;
+  height: 1050px;
   background: #eee;
   border-radius: 60% / 10%;
   transform: translateY(-180px);

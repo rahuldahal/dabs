@@ -149,6 +149,8 @@ $maritalStatus = $patientsDetails['maritalStatus'];
 $bloodGroup= $patientsDetails['bloodGroup'];
 $password= $patientsDetails['password'];
 $hashedPassword = md5($password);
+$address = $patientsDetails['address'];
+$contact = $patientsDetails['phone'];
 $role= "patient";
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 

@@ -1,4 +1,5 @@
 <?php
+include(dirname(__DIR__)."/includes/connection.php");
 include(dirname(__DIR__)."/includes/header.php");
 session_start();
 if(count($_SESSION)==0){
@@ -8,10 +9,10 @@ if(count($_SESSION)==0){
 ?>
 
 <title>Dashboard</title>
+
 </head>
 <body>
 <h1><?php echo $_SESSION['firstName']."'s"; ?> Dashboard</h1>
-
 <div class="tabs">
   <div class="tab-2">
     <label for="tab2-1">Appointments</label>
@@ -30,7 +31,8 @@ if(count($_SESSION)==0){
     <input id="tab2-2" name="tabs-two" type="radio">
     <div>
       <h4>Book a new appointment</h4>
-      <form action="createAppointment.php" method="POST">
+      <form action="../auth/requestForAppointment.php" method="POST">
+      <!-- <form action="../auth/createAppointment.php" method="POST">
           <label for="reason">Reason</label>
           <textarea name="reason" id="reason" cols="30" rows="10"></textarea>
           
@@ -42,7 +44,54 @@ if(count($_SESSION)==0){
           </select>
 
           <input type="submit" name="appointmentDetails" value="Get Appointment">
-      </form>
+      </form> -->
+    <table>
+        <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Specialization</th>
+        <th>Degree</th>
+        <th>Available Time</th>
+        </tr>
+
+<?php
+$sql = "SELECT * FROM (user INNER JOIN doctor ON user.userId = doctor.userId);";
+$resultSet = mysqli_query($conn, $sql);
+$numRows = mysqli_num_rows($resultSet);
+if($numRows > 0){
+    $data= array();
+    while($row = mysqli_fetch_assoc($resultSet)){
+        // array_push($data, $row);
+        echo "<tr>";
+			// echo "<td>".$row['doctor_id']."</td>";
+			echo "<td>".$row['firstName']."</td>";								
+			echo "<td>".$row['lastName']."</td>";
+			echo "<td>".$row['specialization']."</td>";
+			echo "<td>".$row['degree']."</td>";
+			echo "<td>".$row['availabilityTime']."</td>";
+      $doctorId = $row['doctorId'];
+								
+			// echo "<td>".$row['fee']."</td>";
+            // echo "<td><button type='submit' name='submit' style='color:#000;' onclick='getAppointment()'>Get Appointment</button></td>";		
+      echo "<td>
+          <form action=\"../auth/createAppointment.php\" method=\"POST\">
+          <input type=\"number\" hidden value=\"<?php $doctorId;?>\">
+          <button type=\"submit\" name=\"submit\" style=\"color:#000;\">Get Appointment</button>
+          </form>
+          </td>";
+      echo "</tr>";
+    }
+}
+?>
+
+</table>
+ <textarea name="" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
 </div>
+</form>
+<!-- <script>
+  function getAppointment(){
+    document.location.href="../auth/createAppointment.php";
+  }
+</script> -->

@@ -34,9 +34,12 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="female">Female</option>
                                 <option value="others">Others</option>
                             </select>
+                            <br/>
+                            <br/>
 
                             <label for="dob">Date of Birth</label>
                             <input type="date" name="dob" id="dob" />
+                            <br/>
 
                             <label for="bloodGroup">Blood Group</label>
                             <select name="bloodGroup" id="bloodGroup">
@@ -49,13 +52,17 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                             </select>
+                            <br/>
+                            <br/>
 
                             <label for="maritalStatus">Marital Status</label>
                             <select name="maritalStatus" id="maritalStatus">
                                 <option value="single">single</option>
                                 <option value="married">married</option>
                                 <option value="divorced">divorced</option>
-                            </select>                            
+                            </select>   
+                            <br/>   
+                            <br/>                      
                         </div>
                         
                         <div data-step="three">
@@ -69,6 +76,8 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="Anesthesiologist">Anesthesiologist</option>
                                 <option value="Psychiatrist">Psychiatrist</option>
                             </select>
+                            <br/>
+                            <br/>
 
                             <label for="degree">Degree</label>
                             <select name="degree" id="degree">
@@ -77,6 +86,11 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="DM">DM</option>
                                 <option value="DNB">DNB</option>
                             </select>
+                            <br/>
+                            <br/>
+
+                            <label for="availabilityTime">Available Time</label>
+                            <input type="datetime-local" id="availabilityTime" name="availabilityTime" placeholder="name@domain.com" required>
                         </div>
 
                         <div data-step="four">

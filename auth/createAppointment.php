@@ -38,23 +38,23 @@ function isReasonValid($reason){
     return false;
 }
 
-function isDateTimeValid($value)
-{
-    global $regex;
-    return (preg_match($regex["yyyy-mm-dd hh:mm:ss"], $value));
-}
+// function isDateTimeValid($value)
+// {
+//     global $regex;
+//     return (preg_match($regex["yyyy-mm-dd hh:mm:ss"], $value));
+// }
 
 $isReasonValid= isReasonValid($appointmentDetails['reason']);
 if(!$isReasonValid){
     array_push($errors, "Reason " . $errorMessages['notAlpha']);
 }
 
-$isDateTimeValid= isDateTimeValid($appointmentDetails['DateAndTime']);
-if(!$isDateTimeValid){
-    array_push($errors, "Date and time " . $errorMessages['invalidDate'] . " yyyy-mm-dd hh:mm:ss!");
-}
+// $isDateTimeValid= isDateTimeValid($appointmentDetails['DateAndTime']);
+// if(!$isDateTimeValid){
+//     array_push($errors, "Date and time " . $errorMessages['invalidDate'] . " yyyy-mm-dd hh:mm:ss!");
+// }
 
-$userId= $appointmentDetails['userId'];
+// $userId= $appointmentDetails['userId'];
 $query = "SELECT userId FROM user WHERE userId= '$userId';";
 $resultSet = mysqli_query($conn, $query);
 $numRows = mysqli_num_rows($resultSet);
@@ -78,22 +78,44 @@ else{
     print_r($appointmentDetails);
 }
 
-$userId= $appointmentDetails['userId'];
+// $userId= $appointmentDetails['userId'];
+$userId= $_SESSION['userId'];
 $doctorId= $appointmentDetails['doctorId'];
 $reason= $appointmentDetails['reason'];
-$dateAndTime= $appointmentDetails['DateAndTime'];
+$date= $appointmentDetails['date'];
+$time= $appointmentDetails['time'];
 $fee= 200;
 
-$query="SELECT token FROM appointment ORDER BY userId DESC LIMIT 1;";
-$resultSet = mysqli_query($conn, $query);
+
+$sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId';";
+$resultSet = mysqli_query($conn, $sql);
 $numRows = mysqli_num_rows($resultSet);
 if($numRows > 0){
-    $rows = mysqli_fetch_assoc($resultSet);
-    $token = $rows['token'];
+    $token = array();
+    while($rows = mysqli_fetch_assoc($resultSet)){
+        array_push($token, $rows);
+    }
+    $count = count($token);
+    // print_r($token);
 }
 
-++$token;
-$sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, token, fee) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$token', '$fee');";
+// if($count > 0){
+    ++$count; //++count garera insert garnu paryo
+    $sql = "INSERT INTO appointment (userId, doctorId, reason, date, time, token, fee) VALUES ('$userId', '$doctorId', '$reason', '$date', '$time', '$count', '$fee');";
+// }
+// else {
+//     $sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, fee) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$fee');";
+// }
+
+// $query="SELECT token FROM appointment ORDER BY userId DESC LIMIT 1;";
+// $resultSet = mysqli_query($conn, $query);
+// $numRows = mysqli_num_rows($resultSet);
+// if($numRows > 0){
+//     $rows = mysqli_fetch_assoc($resultSet);
+//     $token = $rows['token'];
+// }
+
+
 $resultSet= mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows > 0){
