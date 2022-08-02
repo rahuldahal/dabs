@@ -26,15 +26,6 @@ if ($numRows > 0) {
 </head>
 
 <body>
-<<<<<<< HEAD
-<h1><?php echo $_SESSION['firstName']."'s";?> Dashboard</h1>
-<div class="tabs">
-  <div class="tab-2">
-    <label for="tab2-1">Appointments</label>
-    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-    <div>
-      <h4>Appointments you've booked</h4>
-=======
   <h1><?php echo $_SESSION['firstName'] . "'s"; ?> Dashboard</h1>
   <div class="tabs">
     <div class="tab-2">
@@ -42,7 +33,6 @@ if ($numRows > 0) {
       <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
       <div>
         <h4>Appointments you've booked</h4>
->>>>>>> 50a1609a746ecd8ffaccc0100d300fb4dbbbf41a
         <ul>
           <li>Appointment One</li>
           <li>Appontment Two</li>
@@ -50,25 +40,6 @@ if ($numRows > 0) {
         </ul>
       </div>
     </div>
-<<<<<<< HEAD
-  </div>
-  <div class="tab-2">
-    <label for="tab2-2">New</label>
-    <input id="tab2-2" name="tabs-two" type="radio">
-    <div>
-      <h4>Book a new appointment</h4>
-      <form action="../auth/createAppointment.php" method="POST">
-      <!-- <form action="../auth/createAppointment.php" method="POST">
-          <label for="reason">Reason</label>
-          <textarea name="reason" id="reason" cols="30" rows="10"></textarea>
-          
-          <label for="doctor">Doctor</label>
-          <select name="doctor" id="doctor">
-              <option value="DoctorOne">Doctor One</option>
-              <option value="DoctorTwo">Doctor Two</option>
-              <option value="DoctorThree">Doctor Three</option>
-          </select>
-=======
     <div class="tab-2">
       <label for="tab2-2" class="tabLabel">New</label>
       <input id="tab2-2" name="tabs-two" type="radio">
@@ -110,7 +81,6 @@ if ($numRows > 0) {
               <textarea disabled name="reason" id="reason" cols="30" rows="10"></textarea>
             </div>
           </div>
->>>>>>> 50a1609a746ecd8ffaccc0100d300fb4dbbbf41a
 
           <input type="submit" name="appointmentDetails" value="Get Appointment">
         </form>
@@ -140,23 +110,6 @@ if ($numRows > 0) {
 // 			echo "<td>".$row['availabilityTime']."</td>";
 //       $doctorId = $row['doctorId'];
 								
-<<<<<<< HEAD
-			// echo "<td>".$row['fee']."</td>";
-            // echo "<td><button type='submit' name='submit' style='color:#000;' onclick='getAppointment()'>Get Appointment</button></td>";		
-      echo "<td>
-              <form action=\"../auth/createAppointment.php\" method=\"POST\">
-                <input type=\"number\" hidden value='".$doctorId."'>
-                <textarea name=\"reason\" id=\"\" cols=\"30\" rows=\"10\"></textarea>
-                <button type=\"submit\" name=\"submit\" style=\"color:#000;\">Get Appointment</button>
-              </form>
-          </td>";
-      echo "</tr>";
-    }
-}
-?>
-
-</table>
-=======
 // 			// echo "<td>".$row['fee']."</td>";
 //             // echo "<td><button type='submit' name='submit' style='color:#000;' onclick='getAppointment()'>Get Appointment</button></td>";		
 //       echo "<td>
@@ -172,7 +125,6 @@ if ($numRows > 0) {
 
 </table> -->
       </div>
->>>>>>> 50a1609a746ecd8ffaccc0100d300fb4dbbbf41a
     </div>
   </div>
   </form>
