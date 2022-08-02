@@ -1,5 +1,21 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
+
+if (!isset($_GET["doctorUpdateDetails"])) {
+    die("Empty Data");
+}
+
+$doctorId = $_GET['doctorId'];
+$sql = "SELECT * FROM (user INNER JOIN doctor ON user.userId = doctor.userId) WHERE doctorId = '$doctorId'; ";
+$resultSet = mysqli_query($conn, $sql);
+$numRows = mysqli_num_rows($resultSet);
+$doctorDetails = array();
+
+if($numRows > 0){
+    while($row = mysqli_fetch_assoc($resultSet)){
+        array_push($doctorDetails, $row);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,18 +34,18 @@ include(dirname(__DIR__).'/includes/connection.php');
                         <div class="steps">
                         <div data-step="one">
                             <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="Hari" required />
+                            <input type="text" id="firstName" name="firstName" placeholder="Hari" value="<?php echo $doctorDetails[0]['firstName']; ?>" required />
                             
                             <label for="middleName">Middle Name</label>
-                            <input type="text" id="middleName" name="middleName" placeholder="Prasad" required />
+                            <input type="text" id="middleName" name="middleName" placeholder="Prasad" value="<?php echo $doctorDetails[0]['middleName']; ?>" required />
 
                             <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Bastola" required />
+                            <input type="text" id="lastName" name="lastName" placeholder="Bastola" value="<?php echo $doctorDetails[0]['lastName']; ?>" required />
                         </div>
 
                         <div data-step="two">
                             <label for="gender">Gender</label>
-                            <select name="gender" id="gender">
+                            <select name="gender" id="gender" value="<?php echo $doctorDetails[0]['gender']; ?>">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="others">Others</option>
@@ -38,11 +54,11 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
 
                             <label for="dob">Date of Birth</label>
-                            <input type="date" name="dob" id="dob" />
+                            <input type="date" name="dob" id="dob" value="<?php echo $doctorDetails[0]['dob']; ?>" />
                             <br/>
 
                             <label for="bloodGroup">Blood Group</label>
-                            <select name="bloodGroup" id="bloodGroup">
+                            <select name="bloodGroup" id="bloodGroup" value="<?php echo $doctorDetails[0]['bloodGroup']; ?>">
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
@@ -56,7 +72,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
 
                             <label for="maritalStatus">Marital Status</label>
-                            <select name="maritalStatus" id="maritalStatus">
+                            <select name="maritalStatus" id="maritalStatus" value="<?php echo $doctorDetails[0]['maritalStatus']; ?>">
                                 <option value="single">single</option>
                                 <option value="married">married</option>
                                 <option value="divorced">divorced</option>
@@ -67,7 +83,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                         
                         <div data-step="three">
                         <label for="specialization">Specialization</label>
-                            <select name="specialization" id="specialization">
+                            <select name="specialization" id="specialization" value="<?php echo $doctorDetails[0]['specialization']; ?>">
                                 //Pediatrician', 'Neurologist', 'Dermatologist', 'Anesthesiologist', 'Psychiatrist
                                 <option value="Pediatrician">Pediatrician</option>
                                 <option value="Neurologist">Neurologist</option>
@@ -79,7 +95,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
 
                             <label for="degree">Degree</label>
-                            <select name="degree" id="degree">
+                            <select name="degree" id="degree" value="<?php echo $doctorDetails[0]['degree']; ?>">
                                 <option value="MBBS">MBBS</option>
                                 <option value="MD">MD</option>
                                 <option value="DM">DM</option>
@@ -89,25 +105,22 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
 
                             <label for="availabilityTime">Available Time</label>
-                            <input type="datetime-local" id="availabilityTime" name="availabilityTime" placeholder="" required>
+                            <input type="text" id="availabilityTime" name="availabilityTime" placeholder="" value="<?php echo $doctorDetails[0]['availabilityTime']; ?>" required>
                         </div>
 
                         <div data-step="four">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="name@domain.com" required>
-
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="password" required />
+                            <input type="email" id="email" name="email" placeholder="name@domain.com" value="<?php echo $doctorDetails[0]['email']; ?>" required>
                         </div>
 
                         <div data-step="five">
 
                             <label for="status">Status</label>
-                            <input type="status" id="status" name="status" placeholder="status" required />
+                            <input type="status" id="status" name="status" placeholder="status" value="<?php echo $doctorDetails[0]['status']; ?>" required />
                         </div>
                         </div>
 
-                        <input type="number" hidden value='".$doctorId."'>
+                        <input type="number" hidden name="doctorId" value="<?php echo $doctorId; ?>">
 
                         <!-- <button data-button-action="previous">Previous</button>
                         <button data-button-action="next">Next</button> -->

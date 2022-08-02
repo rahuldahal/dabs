@@ -6,10 +6,13 @@ include(dirname(__DIR__).'/includes/connection.php');
     <table>
         <tr>
         <th>First Name</th>
+        <th>Middle Name </th>
         <th>Last Name</th>
         <th>Specialization</th>
         <th>Degree</th>
         <th>Available Time</th>
+        <th>Status</th>
+        <th>Action</th>
         </tr>
 
 <?php
@@ -22,19 +25,25 @@ if($numRows > 0){
         // array_push($data, $row);
         echo "<tr>";
 			// echo "<td>".$row['doctor_id']."</td>";
-			echo "<td>".$row['firstName']."</td>";
-								
+			echo "<td>".$row['firstName']."</td>";	
+			echo "<td>".$row['middleName']."</td>";							
 			echo "<td>".$row['lastName']."</td>";
 			echo "<td>".$row['specialization']."</td>";
 			echo "<td>".$row['degree']."</td>";
 			echo "<td>".$row['availabilityTime']."</td>";
-								
-			// echo "<td>".$row['fee']."</td>";
-            echo "<td><button type='submit' name='submit' style='color:#000;'>Update</button>
-            <button type='submit' name='submit' style='color:#000;'>Delete</button></td>";		
-		echo "</tr>";
+            echo "<td>".$row['status']."</td>";								
+			// echo "<td>".$row['fee']."</td>";3
+            $doctorId = $row['doctorId'];
+            echo "<td> 
+            <form action=\"../views/editDoctor.php\">
+                <input type=\"hidden\" name=\"doctorId\" value=\"$doctorId\" /> 
+                <input type=\"submit\" name=\"doctorUpdateDetails\" value=\"Update\" />
+            </form>
+            </td>";		
+            echo "</tr>";
+        }
     }
-}
-?>
-
+    ?>
+    <!-- echo "<td><input hidden type='number' name='doctorId' " -->
+    
 </table>

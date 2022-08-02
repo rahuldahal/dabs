@@ -89,7 +89,7 @@ $isBloodGroupValid = in_array($doctorDetails['bloodGroup'], $bloodGroup);
 $isMaritalStatusValid = in_array($doctorDetails['maritalStatus'], $maritalStatus);
 $isSpecializationValid = in_array($doctorDetails['specialization'], $specialization);
 $isDegreeValid = in_array($doctorDetails['degree'], $degree);
-$isStatusValid = in_array($doctorDetails['status'], $status);
+// $isStatusValid = in_array($doctorDetails['status'], $status);
 $isPasswordValid = isPasswordValid($doctorDetails['password']);
 // $isDateTimeValid= isDateTimeValid($doctorDetails['availabilityTime']);
 
@@ -137,9 +137,9 @@ if (!$isDegreeValid) {
     array_push($errors, "Degree " . $errorMessages['notInEnum']);
 }
 
-if (!$isStatusValid) {
-    array_push($errors, "Status " . $errorMessages['notInEnum']);
-}
+// if (!$isStatusValid) {
+//     array_push($errors, "Status " . $errorMessages['notInEnum']);
+// }
 
 if (!$isPasswordValid) {
     array_push($errors, $errorMessages['weakPassword']);
@@ -170,12 +170,12 @@ $degree= $doctorDetails['degree'];
 $availabilityTime= $doctorDetails['availabilityTime'];
 $password= $doctorDetails['password'];
 $hashedPassword = md5($password);
-$status= $doctorDetails['status'];
+$status= "active";
 $role= "doctor";
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
-$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo, status) VALUES ('$firstName',
-'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo', '$status');";
+$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo) VALUES ('$firstName',
+'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo');";
 $resultSet1= mysqli_query($conn, $sql1);
 $affectedRows1= mysqli_affected_rows($conn);
 if($affectedRows1>0){
@@ -189,8 +189,8 @@ if($affectedRows1>0){
         $row=mysqli_fetch_assoc($resultSet2);
         $userId= $row['userId'];
 
-        $sql3 = "INSERT INTO doctor (userId, specialization, degree, availabilityTime) VALUES ('$userId',
-        '$specialization', '$degree', '$availabilityTime');";
+        $sql3 = "INSERT INTO doctor (userId, specialization, degree, availabilityTime, status) VALUES ('$userId',
+        '$specialization', '$degree', '$availabilityTime', '$status');";
         $resultSet3= mysqli_query($conn, $sql3);
         $affectedRows3= mysqli_affected_rows($conn);
         if($affectedRows3 > 0){

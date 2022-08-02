@@ -11,7 +11,7 @@ include(dirname(__DIR__).'/includes/connection.php');
 </head>
 <body>
     <div class="signup">
-				<form action="../auth/doctorSignup.php" method="POST">
+				<form action="../admin/addDoctor.php" method="POST">
 					<label class="signupTitle" for="chk" aria-hidden="true">Add New Doctor</label>
 
 					<div class="fields multiStepForm">
@@ -90,7 +90,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
 
                             <label for="availabilityTime">Available Time</label>
-                            <input type="datetime-local" id="availabilityTime" name="availabilityTime" placeholder="" required>
+                            <input type="text" id="availabilityTime" name="availabilityTime" placeholder="" required>
                         </div>
 
                         <div data-step="four">
@@ -99,9 +99,6 @@ include(dirname(__DIR__).'/includes/connection.php');
 
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" placeholder="password" required />
-
-                            <label for="status">Status</label>
-                            <input type="status" id="status" name="status" placeholder="status" required />
                         </div>
                         </div>
 

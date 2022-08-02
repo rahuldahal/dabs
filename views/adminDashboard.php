@@ -17,7 +17,7 @@ if(count($_SESSION)==0){
         <a href="addDoctor.php">Add Doctor</a>
     </li>
     <li>
-        <a href="editDoctor.php">Update Doctor</a>
+        <a href="../admin/viewDoctors.php">View Doctor</a>
     </li>
     <li>
         <a href="../admin/viewAppointment.php">Appointment Details</a>
