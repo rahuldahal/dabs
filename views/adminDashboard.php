@@ -17,12 +17,10 @@ if(count($_SESSION)==0){
         <a href="addDoctor.php">Add Doctor</a>
     </li>
     <li>
-        <a href="removeDoctor.php">Delete Doctor</a>
+        <a href="editDoctor.php">Update Doctor</a>
     </li>
     <li>
-        <a href="editDoctor.php">Delete Doctor</a>
+        <a href="../admin/viewAppointment.php">Appointment Details</a>
     </li>
-    <li>
-        <a href="removePatient.php">Delete Patient</a>
-    </li>
+
 </nav>

@@ -166,9 +166,10 @@ $availabilityTime= $doctorDetails['availabilityTime'];
 $password= $doctorDetails['password'];
 $hashedPassword = md5($password);
 $role= "doctor";
+$status= $doctorDetails['status'];
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
-$sql = "UPDATE user SET firstName='$firstName', middleName='$middleName', lastName='$lastName', email='$email', gender='$gender', maritalStatus='$maritalStatus', bloodGroup='$bloodGroup', password='$hashedPassword' WHERE userId='$userId';";
+$sql = "UPDATE user SET firstName='$firstName', middleName='$middleName', lastName='$lastName', email='$email', gender='$gender', maritalStatus='$maritalStatus', bloodGroup='$bloodGroup', password='$hashedPassword', status='$status' WHERE userId='$userId';";
 $resultSet= mysqli_query($conn, $sql);
         $affectedRows= mysqli_affected_rows($conn);
         if($affectedRows > 0){

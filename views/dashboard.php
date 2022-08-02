@@ -12,7 +12,7 @@ if(count($_SESSION)==0){
 
 </head>
 <body>
-<h1><?php echo $_SESSION['firstName']."'s"; ?> Dashboard</h1>
+<h1><?php echo $_SESSION['firstName']."'s";?> Dashboard</h1>
 <div class="tabs">
   <div class="tab-2">
     <label for="tab2-1">Appointments</label>
@@ -31,7 +31,7 @@ if(count($_SESSION)==0){
     <input id="tab2-2" name="tabs-two" type="radio">
     <div>
       <h4>Book a new appointment</h4>
-      <form action="../auth/requestForAppointment.php" method="POST">
+      <form action="../auth/createAppointment.php" method="POST">
       <!-- <form action="../auth/createAppointment.php" method="POST">
           <label for="reason">Reason</label>
           <textarea name="reason" id="reason" cols="30" rows="10"></textarea>
@@ -74,10 +74,11 @@ if($numRows > 0){
 			// echo "<td>".$row['fee']."</td>";
             // echo "<td><button type='submit' name='submit' style='color:#000;' onclick='getAppointment()'>Get Appointment</button></td>";		
       echo "<td>
-          <form action=\"../auth/createAppointment.php\" method=\"POST\">
-          <input type=\"number\" hidden value=\"<?php $doctorId;?>\">
-          <button type=\"submit\" name=\"submit\" style=\"color:#000;\">Get Appointment</button>
-          </form>
+              <form action=\"../auth/createAppointment.php\" method=\"POST\">
+                <input type=\"number\" hidden value='".$doctorId."'>
+                <textarea name=\"reason\" id=\"\" cols=\"30\" rows=\"10\"></textarea>
+                <button type=\"submit\" name=\"submit\" style=\"color:#000;\">Get Appointment</button>
+              </form>
           </td>";
       echo "</tr>";
     }
@@ -85,7 +86,6 @@ if($numRows > 0){
 ?>
 
 </table>
- <textarea name="" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
 </div>

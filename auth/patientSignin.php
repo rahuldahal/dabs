@@ -24,7 +24,7 @@ if (!$isEmailValid) {
     die($errorMessages['notEmail']);
 }
 
-$sql= "SELECT firstName FROM user WHERE email='$email' AND password='$hashedPassword'";
+$sql= "SELECT * FROM user WHERE email='$email' AND password='$hashedPassword'";
 $resultSet= mysqli_query($conn, $sql);
 $numRows= mysqli_num_rows($resultSet);
 if($numRows>0){

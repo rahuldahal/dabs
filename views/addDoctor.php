@@ -12,7 +12,7 @@ include(dirname(__DIR__).'/includes/connection.php');
 <body>
     <div class="signup">
 				<form action="../auth/doctorSignup.php" method="POST">
-					<label class="signupTitle" for="chk" aria-hidden="true">Sign Up</label>
+					<label class="signupTitle" for="chk" aria-hidden="true">Add New Doctor</label>
 
 					<div class="fields multiStepForm">
                         <div class="steps">
@@ -90,7 +90,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
 
                             <label for="availabilityTime">Available Time</label>
-                            <input type="datetime-local" id="availabilityTime" name="availabilityTime" placeholder="name@domain.com" required>
+                            <input type="datetime-local" id="availabilityTime" name="availabilityTime" placeholder="" required>
                         </div>
 
                         <div data-step="four">
@@ -99,13 +99,16 @@ include(dirname(__DIR__).'/includes/connection.php');
 
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" placeholder="password" required />
+
+                            <label for="status">Status</label>
+                            <input type="status" id="status" name="status" placeholder="status" required />
                         </div>
                         </div>
 
-                        <button data-button-action="previous">Previous</button>
-                        <button data-button-action="next">Next</button>
+                        <!-- <button data-button-action="previous">Previous</button>
+                        <button data-button-action="next">Next</button> -->
 
-                        <input hidden type="submit" name="doctorSignupDetails" value="Add" />
+                        <input type="submit" name="doctorSignupDetails" value="Add" />
                     </div>
 				</form>
 			</div>

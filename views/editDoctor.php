@@ -12,7 +12,7 @@ include(dirname(__DIR__).'/includes/connection.php');
 <body>
     <div class="signup">
 				<form action="../admin/updateDoctor.php" method="POST">
-					<label class="signupTitle" for="chk" aria-hidden="true">Sign Up</label>
+					<label class="signupTitle" for="chk" aria-hidden="true">Update</label>
 
 					<div class="fields multiStepForm">
                         <div class="steps">
@@ -34,9 +34,12 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="female">Female</option>
                                 <option value="others">Others</option>
                             </select>
+                            <br/>
+                            <br/>
 
                             <label for="dob">Date of Birth</label>
                             <input type="date" name="dob" id="dob" />
+                            <br/>
 
                             <label for="bloodGroup">Blood Group</label>
                             <select name="bloodGroup" id="bloodGroup">
@@ -49,13 +52,17 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                             </select>
+                            <br/>
+                            <br/>
 
                             <label for="maritalStatus">Marital Status</label>
                             <select name="maritalStatus" id="maritalStatus">
                                 <option value="single">single</option>
                                 <option value="married">married</option>
                                 <option value="divorced">divorced</option>
-                            </select>                            
+                            </select>    
+                            <br/>
+                            <br/>                        
                         </div>
                         
                         <div data-step="three">
@@ -68,6 +75,8 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="Anesthesiologist">Anesthesiologist</option>
                                 <option value="Psychiatrist">Psychiatrist</option>
                             </select>
+                            <br/>
+                            <br/>
 
                             <label for="degree">Degree</label>
                             <select name="degree" id="degree">
@@ -76,6 +85,11 @@ include(dirname(__DIR__).'/includes/connection.php');
                                 <option value="DM">DM</option>
                                 <option value="DNB">DNB</option>
                             </select>
+                            <br/>
+                            <br/>
+
+                            <label for="availabilityTime">Available Time</label>
+                            <input type="datetime-local" id="availabilityTime" name="availabilityTime" placeholder="" required>
                         </div>
 
                         <div data-step="four">
@@ -85,12 +99,20 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" placeholder="password" required />
                         </div>
+
+                        <div data-step="five">
+
+                            <label for="status">Status</label>
+                            <input type="status" id="status" name="status" placeholder="status" required />
+                        </div>
                         </div>
 
-                        <button data-button-action="previous">Previous</button>
-                        <button data-button-action="next">Next</button>
+                        <input type="number" hidden value='".$doctorId."'>
 
-                        <input hidden type="submit" name="doctorUpdateDetails" value="Update" />
+                        <!-- <button data-button-action="previous">Previous</button>
+                        <button data-button-action="next">Next</button> -->
+
+                        <input type="submit" name="doctorUpdateDetails" value="Update" />
                     </div>
 				</form>
 			</div>

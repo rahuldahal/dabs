@@ -89,6 +89,7 @@ $isBloodGroupValid = in_array($doctorDetails['bloodGroup'], $bloodGroup);
 $isMaritalStatusValid = in_array($doctorDetails['maritalStatus'], $maritalStatus);
 $isSpecializationValid = in_array($doctorDetails['specialization'], $specialization);
 $isDegreeValid = in_array($doctorDetails['degree'], $degree);
+$isStatusValid = in_array($doctorDetails['status'], $status);
 $isPasswordValid = isPasswordValid($doctorDetails['password']);
 // $isDateTimeValid= isDateTimeValid($doctorDetails['availabilityTime']);
 
@@ -136,6 +137,10 @@ if (!$isDegreeValid) {
     array_push($errors, "Degree " . $errorMessages['notInEnum']);
 }
 
+if (!$isStatusValid) {
+    array_push($errors, "Status " . $errorMessages['notInEnum']);
+}
+
 if (!$isPasswordValid) {
     array_push($errors, $errorMessages['weakPassword']);
 }
@@ -165,11 +170,12 @@ $degree= $doctorDetails['degree'];
 $availabilityTime= $doctorDetails['availabilityTime'];
 $password= $doctorDetails['password'];
 $hashedPassword = md5($password);
+$status= $doctorDetails['status'];
 $role= "doctor";
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
-$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo) VALUES ('$firstName',
-'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo');";
+$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo, status) VALUES ('$firstName',
+'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo', '$status');";
 $resultSet1= mysqli_query($conn, $sql1);
 $affectedRows1= mysqli_affected_rows($conn);
 if($affectedRows1>0){
