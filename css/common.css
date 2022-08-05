@@ -20,3 +20,11 @@ label {
 textarea {
   width: 600px;
 }
+
+table {
+  /* border: 1px solid; */
+  padding: 5px;
+  border-spacing: 15px;
+  display: inline;
+  text-align: center;
+}
