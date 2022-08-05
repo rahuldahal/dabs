@@ -26,17 +26,17 @@ function trimData($values){
 
 $appointmentDetails = trimData($_POST);
 
-function isAlpha($value)
-{
-    return ctype_alpha($value);
-}
+// function isAlpha($value)
+// {
+//     return ctype_alpha($value);
+// }
 
-function isReasonValid($reason){
-    if (isAlpha($reason)) {
-        return true;
-    }
-    return false;
-}
+// function isReasonValid($reason){
+//     if (isAlpha($reason)) {
+//         return true;
+//     }
+//     return false;
+// }
 
 // function isDateTimeValid($value)
 // {
@@ -44,17 +44,17 @@ function isReasonValid($reason){
 //     return (preg_match($regex["yyyy-mm-dd hh:mm:ss"], $value));
 // }
 
-$isReasonValid= isReasonValid($appointmentDetails['reason']);
-if(!$isReasonValid){
-    array_push($errors, "Reason " . $errorMessages['notAlpha']);
-}
+// $isReasonValid= isReasonValid($appointmentDetails['reason']);
+// if(!$isReasonValid){
+//     array_push($errors, "Reason " . $errorMessages['notAlpha']);
+// }
 
 // $isDateTimeValid= isDateTimeValid($appointmentDetails['DateAndTime']);
 // if(!$isDateTimeValid){
 //     array_push($errors, "Date and time " . $errorMessages['invalidDate'] . " yyyy-mm-dd hh:mm:ss!");
 // }
 
-// $userId= $appointmentDetails['userId'];
+$userId= $appointmentDetails['userId'];
 $query = "SELECT userId FROM user WHERE userId= '$userId';";
 $resultSet = mysqli_query($conn, $query);
 $numRows = mysqli_num_rows($resultSet);
@@ -78,12 +78,13 @@ else{
     print_r($appointmentDetails);
 }
 
-// $userId= $appointmentDetails['userId'];
-$userId= $_SESSION['userId'];
+$userId= $appointmentDetails['userId'];
+// $userId= $_SESSION['userId'];
 $doctorId= $appointmentDetails['doctorId'];
 $reason= $appointmentDetails['reason'];
 $date= $appointmentDetails['date'];
-$time= $appointmentDetails['time'];
+$timeSlot= $appointmentDetails['timeSlot'];
+$status= "Pending";
 $fee= 200;
 
 
@@ -101,7 +102,7 @@ if($numRows > 0){
 
 // if($count > 0){
     ++$count; //++count garera insert garnu paryo
-    $sql = "INSERT INTO appointment (userId, doctorId, reason, date, time, token, fee) VALUES ('$userId', '$doctorId', '$reason', '$date', '$time', '$count', '$fee');";
+    $sql = "INSERT INTO appointment (userId, doctorId, reason, date, timeSlot, token, fee, status) VALUES ('$userId', '$doctorId', '$reason', '$date', '$timeSlot', '$count', '$fee', '$status');";
 // }
 // else {
 //     $sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, fee) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$fee');";
