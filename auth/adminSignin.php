@@ -32,9 +32,9 @@ $numRows= mysqli_num_rows($resultSet);
 if($numRows>0){
     $row = mysqli_fetch_assoc($resultSet);
     print_r($row);
-    $_SESSION['firstName']= $row['firstName'];
+    //$_SESSION['firstName']= $row['firstName'];
     $_SESSION['email']= $email;
-    echo $_SESSION['firstName'];
+    //echo $_SESSION['firstName'];
     header('Location: /dabs/views/adminDashboard.php');
     exit();
 }
