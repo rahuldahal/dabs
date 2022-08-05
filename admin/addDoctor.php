@@ -5,6 +5,8 @@ include(dirname(__DIR__).'/constants/enums.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
 include(dirname(__DIR__)."/includes/header.php");
+include(dirname(__DIR__)."/timeSlot.php");
+
 
 session_start();
 if(count($_SESSION)==0){
@@ -180,13 +182,12 @@ $status= "active";
 $role= "doctor";
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
-$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, photo) VALUES ('$firstName',
-'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$photo');";
+$sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, dob, gender, maritalStatus, role, photo) VALUES ('$firstName',
+'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$dob', '$gender', '$maritalStatus', '$role', '$photo');";
 $resultSet1= mysqli_query($conn, $sql1);
 $affectedRows1= mysqli_affected_rows($conn);
 if($affectedRows1>0){
     echo "Successfully Inserted Into user ";
-
 
     $sql2= "SELECT userId FROM user WHERE email='$email'";
     $resultSet2= mysqli_query($conn, $sql2);
@@ -201,8 +202,44 @@ if($affectedRows1>0){
         $affectedRows3= mysqli_affected_rows($conn);
         if($affectedRows3 > 0){
             echo " Successfully Inserted Into doctor";
+            // exit();
+            //to select availability time of currently inserted doctor
+            // $sql4 = "SELECT doctorId FROM (user INNER JOIN doctor ON user.userId = doctor.userId) WHERE userId = $userId;";
+            $sql4 = "SELECT doctorId FROM doctor WHERE userId= '$userId';";
+            $resultSet4 = mysqli_query($conn, $sql4);
+            $numRows4= mysqli_num_rows($resultSet4);
+                if($numRows4>0){
+                    $row=mysqli_fetch_assoc($resultSet4);
+                    $doctorId= $row['doctorId'];
+                    echo $doctorId;
+                    // exit();
+
+                    
+                    $timeTable = "SELECT availabilityTime FROM doctor WHERE doctorId = '$doctorId';";
+                    $resultSet = mysqli_query($conn, $timeTable);
+                    $numRows = mysqli_num_rows($resultSet);
+                    if($numRows > 0){
+                      while($row = mysqli_fetch_assoc($resultSet)){
+                        $availabilityTime = $row['availabilityTime'];
+                        }
+                      }
+                    // echo $availabilityTime;
+                    // exit();
+                    
+                    $time = getTime($availabilityTime);
+                    $slots = getSlots($time); // array of slots
+                    
+                    $slots=  json_encode($slots);
+                    $insertTimeSlot = "INSERT INTO doctorschedule (doctorId, slots) VALUES ('$doctorId', '$slots');";
+                    $resultSet= mysqli_query($conn, $insertTimeSlot);
+                    $affectedRows= mysqli_affected_rows($conn);
+                    if($affectedRows > 0){
+                       echo " Successfully Inserted Into doctorschedule";                      
+                    }
+
+            
+                }
         }
     }
 }
-
 mysqli_close($conn);
