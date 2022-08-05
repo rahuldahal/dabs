@@ -156,8 +156,8 @@ $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
 
 
-$sql= "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, gender, maritalStatus, role, address, phone, photo) VALUES ('$firstName',
-'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$gender', '$maritalStatus', '$role', '$address', '$phone', '$photo')";
+$sql= "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, dob, gender, maritalStatus, role, address, phone, photo) VALUES ('$firstName',
+'$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$dob', '$gender', '$maritalStatus', '$role', '$address', '$phone', '$photo')";
 $resultSet= mysqli_query($conn, $sql);
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows>0){
