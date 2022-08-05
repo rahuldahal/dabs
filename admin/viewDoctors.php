@@ -1,8 +1,11 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
+include(dirname(__DIR__)."/includes/header.php");
+session_start();
 ?>
 
 <html>
+<h2 class= "tableTitle">Doctor Details</h2>
     <table>
         <tr>
         <th>First Name</th>
