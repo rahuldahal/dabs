@@ -3,14 +3,15 @@ include(dirname(__DIR__).'/includes/connection.php');
 ?>
 
 <html>
-    <table border="1px solid black">
+    <table>
         <tr>
-        <th>userId</th>
-        <th>doctorId</th>
-        <th>reason</th>
-        <th>date</th>
-        <th>time</th>
-        <th>token</th>
+            <th>UserId</th>
+            <th>DoctorId</th>
+            <th>Reason</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Token</th>
+            <th>Action</th>
         </tr>
 
 <?php
