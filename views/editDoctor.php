@@ -1,5 +1,10 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
+session_start();
+if(count($_SESSION)==0){
+    header('Location: /dabs/admin.php');
+    exit();
+}
 
 if (!isset($_GET["doctorUpdateDetails"])) {
     die("Empty Data");
@@ -15,6 +20,8 @@ if($numRows > 0){
     while($row = mysqli_fetch_assoc($resultSet)){
         array_push($doctorDetails, $row);
     }
+    // print_r($doctorDetails);
+    // exit();
 }
 ?>
 

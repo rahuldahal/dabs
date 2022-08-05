@@ -5,6 +5,12 @@
     include(dirname(__DIR__).'/constants/regex.php');
     include(dirname(__DIR__).'/constants/validation.php');
 
+    session_start();
+    if(count($_SESSION)==0){
+        header('Location: /dabs/admin.php');
+        exit();
+      }
+
 $errors = array();
 
 if (!isset($_POST["doctorUpdateDetails"])) {
@@ -145,6 +151,8 @@ $lastName= $doctorDetails['lastName'];
 $email= $doctorDetails['email'];
 $dob= $doctorDetails['dob'];
 $gender= $doctorDetails['gender'];
+echo $gender;
+exit();
 $maritalStatus = $doctorDetails['maritalStatus'];
 $bloodGroup= $doctorDetails['bloodGroup'];
 $specialization= $doctorDetails['specialization'];

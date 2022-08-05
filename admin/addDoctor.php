@@ -4,7 +4,13 @@ include(dirname(__DIR__).'/constants/db.php');
 include(dirname(__DIR__).'/constants/enums.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
-// session_start();
+include(dirname(__DIR__)."/includes/header.php");
+
+session_start();
+if(count($_SESSION)==0){
+    header('Location: /dabs/admin.php');
+    exit();
+  }
 
 $errors = array();
 
