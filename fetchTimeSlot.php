@@ -13,16 +13,24 @@
     
     foreach($doctorSlots as $doctorSlot){
         foreach($doctorSlot as $slots){
-            // echo $slots;
-            // echo gettype($slots);
-            $slot = json_decode($slots, false);
-            print_r($slot);
-            echo "<br/>";
+            $slot = json_decode($slots, false); // array of a slot of a doctor
+            // print_r($slot);
+            // echo "<br/>";
         }
-        echo "<br/>";
+        // echo "<br/>";
     }
 
+    // foreach($slot as $time){
+    //     // $time appointment ko timeSlot sanga compare garnu paryo
+    //     $timeSlotExits= in_array($time, $slotsBooked);
+    //     if($timeSlotExits){
+    //         //FE maa $time nahaalne
+    //     }else{
+    //         //FE maa $time haalne
+    //     }
+    // }
     
+
 
     // echo gettype($doctorSlots[0]['slots']);
     // exit();
