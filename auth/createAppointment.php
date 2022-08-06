@@ -1,9 +1,11 @@
 <?php
-include(dirname(__DIR__).'/includes/connection.php');
+// include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__).'/constants/db.php');
 include(dirname(__DIR__).'/constants/enums.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
+include(dirname(__DIR__).'/fetchTimeSlot.php');
+
 session_start();
 
 $errors = array();
@@ -87,7 +89,7 @@ $timeSlot= $appointmentDetails['timeSlot'];
 $status= "Pending";
 $fee= 200;
 
-
+//to generate token...
 $sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId';";
 $resultSet = mysqli_query($conn, $sql);
 $numRows = mysqli_num_rows($resultSet);
@@ -95,13 +97,45 @@ if($numRows > 0){
     $token = array();
     while($rows = mysqli_fetch_assoc($resultSet)){
         array_push($token, $rows);
+        // array_push($slotsBooked, $rows['timeSlot']); // yesko laagi status <> Cancelled pani garnu parne cha
     }
-    $count = count($token);
+    $count = count($token); // kati ota token cha, 0?, 1?, ...
     // print_r($token);
 }
 
+$sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId' AND status <> 'Cancelled';";
+$resultSet = mysqli_query($conn, $sql);
+$numRows = mysqli_num_rows($resultSet);
+$slotsBooked = array();
+if($numRows > 0){
+    while($rows = mysqli_fetch_assoc($resultSet)){
+        array_push($slotsBooked, $rows['timeSlot']); 
+    }
+    print_r($slotsBooked);
+    // exit();
+}
+
+$notToSend = array();
+$toBeSent = array();
+foreach($slot as $time){
+    // $time appointment ko timeSlot sanga compare garnu paryo
+    $timeSlotExits= in_array($time, $slotsBooked);
+    if($timeSlotExits){
+        $notToSend = array_push($notToSend, $time);
+        // echo $time." should not be sent";
+    }else{
+        $toBeSent = array_push($toBeSent, $time);
+        // echo $time." should be sent";
+    }
+}
+// exit();
+echo count($notToSend);
+echo count($toBeSent);
+exit();
+
+
 // if($count > 0){
-    ++$count; //++count garera insert garnu paryo
+    ++$count; //++count garera insert garnu paryo, 0 ota raicha bhane token 1 huncha, 1ta cha bhane arko ko 2
     $sql = "INSERT INTO appointment (userId, doctorId, reason, date, timeSlot, token, fee, status) VALUES ('$userId', '$doctorId', '$reason', '$date', '$timeSlot', '$count', '$fee', '$status');";
 // }
 // else {
@@ -121,5 +155,5 @@ $resultSet= mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows > 0){
     echo " Successfully Inserted Into appointment";
-        }
+}
 ?>
