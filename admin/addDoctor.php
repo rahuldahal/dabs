@@ -211,8 +211,6 @@ if($affectedRows1>0){
                 if($numRows4>0){
                     $row=mysqli_fetch_assoc($resultSet4);
                     $doctorId= $row['doctorId'];
-                    echo $doctorId;
-                    // exit();
 
                     
                     $timeTable = "SELECT availabilityTime FROM doctor WHERE doctorId = '$doctorId';";

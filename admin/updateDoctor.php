@@ -151,8 +151,6 @@ $lastName= $doctorDetails['lastName'];
 $email= $doctorDetails['email'];
 $dob= $doctorDetails['dob'];
 $gender= $doctorDetails['gender'];
-echo $gender;
-exit();
 $maritalStatus = $doctorDetails['maritalStatus'];
 $bloodGroup= $doctorDetails['bloodGroup'];
 $specialization= $doctorDetails['specialization'];

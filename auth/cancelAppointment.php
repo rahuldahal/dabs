@@ -14,5 +14,5 @@ $sql = "UPDATE appointment SET status = '$status' WHERE appointmentId= '$appoint
   $resultSet= mysqli_query($conn, $sql);
           $affectedRows= mysqli_affected_rows($conn);
           if($affectedRows > 0){
-              echo " Successfully Updated appointment";
+              echo " Appointment Cancled";
           }
