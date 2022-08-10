@@ -34,13 +34,13 @@ include(dirname(__DIR__).'/dabs/includes/connection.php');
                         <div class="steps">
                         <div data-step="one">
                             <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="Saloni" required />
+                            <input type="text" id="firstName" name="firstName" placeholder="Ram" required />
                             
                             <label for="middleName">Middle Name</label>
-                            <input type="text" id="middleName" name="middleName" placeholder="Saloni" required />
+                            <input type="text" id="middleName" name="middleName" placeholder="Kumar" required />
 
                             <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Saloni" required />
+                            <input type="text" id="lastName" name="lastName" placeholder="Thapa" required />
                         </div>
 
                         <div data-step="two">
@@ -81,12 +81,21 @@ include(dirname(__DIR__).'/dabs/includes/connection.php');
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" placeholder="password" required />
                         </div>
+
+                        <div data-step="four">
+                            <label for="address">Address</label>
+                            <input type="address" id="address" name="address" placeholder="Biratnagar" required>
+
+                            <label for="telephone">telephone</label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="telephone" required />
+                        </div>
                         </div>
 
-                        <button data-button-action="previous">Previous</button>
-                        <button data-button-action="next">Next</button>
+                        <button hidden data-button-action="previous">Previous</button>
+                        <button hidden data-button-action="next">Next</button>
 
-                        <input hidden type="submit" name="patientSignupDetails" value="Sign Up" />
+                        <!-- <input hidden type="submit" name="patientSignupDetails" value="Sign Up" /> -->
+                        <input type="submit" name="patientSignupDetails" value="Sign Up" />
                     </div>
 				</form>
 			</div>

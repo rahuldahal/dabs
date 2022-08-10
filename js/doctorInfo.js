@@ -7,15 +7,17 @@
   //   console.log(specializations);
 
   const specializationElement = document.querySelector("#specialization");
+  const dateElement = document.querySelector("#date");
   specializationElement.addEventListener("change", (e) =>
     handleSpecializationChange(e.currentTarget)
   );
 
   async function handleSpecializationChange(e) {
     const { value } = e;
+    const { value:date } = dateElement;
 
     try {
-      const res = await fetch(`/dabs/api/doctors.php?specialization=${value}`);
+      const res = await fetch(`/dabs/api/doctors.php?specialization=${value}&date=${date}`);
       const doctors = await res.json();
 
       populateDoctorSelection(doctors);

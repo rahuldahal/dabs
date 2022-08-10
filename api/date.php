@@ -1,10 +1,10 @@
 <?php 
 include(dirname(__DIR__) . "/includes/connection.php");
 
-
+    // if doctor ko field enabled cha bhane malai choose gareko doctor ko id chaiyo
     $doctorId = $_GET['doctorId'];
 
-    $sql = "SELECT date FROM appointment doctorId='$doctorId'";
+    $sql = "SELECT date FROM doctorSchedule WHERE doctorId='$doctorId';";
 
     $resultSet = mysqli_query($conn, $sql);
     $numRows = mysqli_num_rows($resultSet);

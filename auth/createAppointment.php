@@ -103,35 +103,35 @@ if($numRows > 0){
     // print_r($token);
 }
 
-$sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId' AND status <> 'Cancelled';";
-$resultSet = mysqli_query($conn, $sql);
-$numRows = mysqli_num_rows($resultSet);
-$slotsBooked = array();
-if($numRows > 0){
-    while($rows = mysqli_fetch_assoc($resultSet)){
-        array_push($slotsBooked, $rows['timeSlot']); 
-    }
-    print_r($slotsBooked);
-    // exit();
-}
+// $sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId' AND status <> 'Cancelled';";
+// $resultSet = mysqli_query($conn, $sql);
+// $numRows = mysqli_num_rows($resultSet);
+// $slotsBooked = array();
+// if($numRows > 0){
+//     while($rows = mysqli_fetch_assoc($resultSet)){
+//         array_push($slotsBooked, $rows['timeSlot']); 
+//     }
+//     print_r($slotsBooked);
+//     // exit();
+// }
 
-$notToSend = array();
-$toBeSent = array();
-foreach($slot as $time){
-    // $time appointment ko timeSlot sanga compare garnu paryo
-    $timeSlotExits= in_array($time, $slotsBooked);
-    if($timeSlotExits){
-        $notToSend = array_push($notToSend, $time);
-        // echo $time." should not be sent";
-    }else{
-        $toBeSent = array_push($toBeSent, $time);
-        // echo $time." should be sent";
-    }
-}
+// $notToSend = array();
+// $toBeSent = array();
+// foreach($slot as $time){
+//     // $time appointment ko timeSlot sanga compare garnu paryo
+//     $timeSlotExits= in_array($time, $slotsBooked);
+//     if($timeSlotExits){
+//         $notToSend = array_push($notToSend, $time);
+//         // echo $time." should not be sent";
+//     }else{
+//         $toBeSent = array_push($toBeSent, $time);
+//         // echo $time." should be sent";
+//     }
+// }
+// // exit();
+// echo count($notToSend);
+// echo count($toBeSent);
 // exit();
-echo count($notToSend);
-echo count($toBeSent);
-exit();
 
 
 // if($count > 0){

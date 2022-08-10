@@ -3,6 +3,7 @@ include(dirname(__DIR__) . "/includes/connection.php");
 
 
     $specialization = $_GET['specialization'];
+    $date = $_GET['date'];
 
     $sql = "SELECT doctor.doctorId, user.firstName, user.middleName, user.lastName FROM doctor INNER JOIN user ON doctor.userId = user.userId WHERE specialization='$specialization'";
 
@@ -13,7 +14,30 @@ include(dirname(__DIR__) . "/includes/connection.php");
 
     if ($numRows > 0) {
     while ($row = mysqli_fetch_assoc($resultSet)) {
-        array_push($doctors, $row);
+        $doctorId= $row['doctorId'];
+        $daysOff = "SELECT daysOff FROM doctorschedule WHERE doctorId='$doctorId'";
+        
+        $resultSet1 = mysqli_query($conn, $daysOff);
+        $numRows1 = mysqli_num_rows($resultSet1);
+
+        $onLeave;
+
+        if($numRows1 > 0){
+            $leaves =json_decode(mysqli_fetch_assoc($resultSet1)['daysOff']);
+
+            $today = date('Y-m-d');                                                                     
+
+            $onLeave = in_array($today, $leaves);
+
+        }
+        else{
+            echo "fjweoi";
+        }
+        
+        
+        if(!$onLeave){
+            array_push($doctors, $row);
+        }
     }
     }
 

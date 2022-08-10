@@ -37,7 +37,7 @@ if(count($_SESSION)==0){
         </tr>
 
 <?php
-$sql = "SELECT * FROM appointment;";
+$sql = "SELECT * FROM appointment  ORDER BY date DESC;";
 $resultSet = mysqli_query($conn, $sql);
 $numRows = mysqli_num_rows($resultSet);
 $appointmentId;

@@ -59,7 +59,7 @@ if ($numRows > 0) {
           $i = 0;
 
         // selecting all the appointments booked by the current user  
-          $allAppointmentOfUser = "SELECT * FROM appointment WHERE userId = '$userId';";
+          $allAppointmentOfUser = "SELECT * FROM appointment WHERE userId = '$userId' ORDER BY date DESC;";
           $resultSet = mysqli_query($conn, $allAppointmentOfUser);
           $numRows = mysqli_num_rows($resultSet);
           if($numRows == 0){ //no appointments has been made by user
@@ -90,19 +90,19 @@ if ($numRows > 0) {
               $i++;
           }
 
-          // $timeTable = "SELECT availabilityTime FROM doctor WHERE doctorId = '$doctorId';";
-          // $resultSet = mysqli_query($conn, $timeTable);
-          // $numRows = mysqli_num_rows($resultSet);
-          // if($numRows > 0){
-          //   while($row = mysqli_fetch_assoc($resultSet)){
-          //     $availabilityTime = $row['availabilityTime'];
-          //     }
-          //   }
+          $timeTable = "SELECT availabilityTime FROM doctor WHERE doctorId = '$doctorId';";
+          $resultSet = mysqli_query($conn, $timeTable);
+          $numRows = mysqli_num_rows($resultSet);
+          if($numRows > 0){
+            while($row = mysqli_fetch_assoc($resultSet)){
+              $availabilityTime = $row['availabilityTime'];
+              }
+            }
           // // echo $availabilityTime;
           // // exit();
 
-          // $time = getTime($availabilityTime);
-          // $slots = getSlots($time); // array of slots
+          $time = getTime($availabilityTime);
+          $slots = getSlots($time); // array of slots
 
           // $slots=  json_encode($slots);
           // $insertTimeSlot = "INSERT INTO doctorSchedule (doctorId, slots) VALUES ('$doctorId', '$slots');";
@@ -169,6 +169,11 @@ if ($numRows > 0) {
           <div class="appointmentFormFields">
             <div class="doctorDetails">
               
+              <div class="formField">
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date" />
+              </div>
+
             <div class="formField">
                 <label for="specialization">Doctor's Specialization</label>
                 <select name="specialization" id="specialization">
@@ -184,16 +189,10 @@ if ($numRows > 0) {
               <div class="formField">
                 <label for="doctor">Doctor</label>
                 <select disabled name="doctorId" id="doctor">
-                  <option value="">Select The Specialization</option>
+                  <option value="">Select The Doctor</option>
                 </select>
               </div>
 
-              <div class="formField">
-                <label for="date">Date</label>
-                <select disabled name="date" id="date">
-                  <option value="">Select Date</option>
-                </select>
-              </div>
 
               <div class="formField">
                 <label for="slot">Available Time Slot</label>
@@ -265,7 +264,7 @@ if ($numRows > 0) {
   </form>
 
   <script src="/dabs/js/doctorInfo.js"></script>
-  <!-- <script src="/dabs/js/dateInfo.js"></script> -->
+  <script src="/dabs/js/dateInfo.js"></script>
 
   <!-- <th>First Name</th>
               <th>Middle Name</th>

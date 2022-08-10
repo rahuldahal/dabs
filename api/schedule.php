@@ -2,9 +2,9 @@
 include(dirname(__DIR__) . "/includes/connection.php");
 
 
-    $date = $_GET['date'];
+    $doctorId = $_GET['doctorId'];
 
-    $sql = "SELECT timeSlot FROM appointment date='$date'";
+    $sql = "SELECT timeSlot FROM appointment date='$date';";
 
     $resultSet = mysqli_query($conn, $sql);
     $numRows = mysqli_num_rows($resultSet);
