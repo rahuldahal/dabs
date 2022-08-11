@@ -20,7 +20,7 @@ include(dirname(__DIR__) . "/includes/connection.php");
         $resultSet1 = mysqli_query($conn, $daysOff);
         $numRows1 = mysqli_num_rows($resultSet1);
 
-        $onLeave;
+        $onLeave = false;
 
         if($numRows1 > 0){
             $leaves =json_decode(mysqli_fetch_assoc($resultSet1)['daysOff']);
@@ -28,12 +28,7 @@ include(dirname(__DIR__) . "/includes/connection.php");
             $today = date('Y-m-d');                                                                     
 
             $onLeave = in_array($today, $leaves);
-
         }
-        else{
-            echo "fjweoi";
-        }
-        
         
         if(!$onLeave){
             array_push($doctors, $row);
