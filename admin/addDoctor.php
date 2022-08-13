@@ -12,6 +12,9 @@ session_start();
 if(count($_SESSION)==0){
     header('Location: /dabs/admin.php');
     exit();
+}else if($_SESSION['email']!= "admin123@gmail.com"){
+    header('Location: /dabs/admin.php');
+    exit();
   }
 
 $errors = array();

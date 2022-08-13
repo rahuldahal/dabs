@@ -1,5 +1,5 @@
 <?php 
-include(dirname(__DIR__) . "/includes/connection.php");
+    include(dirname(__DIR__) . "/includes/connection.php");
 
     // if doctor ko field enabled cha bhane malai choose gareko doctor ko id chaiyo
     $doctorId = $_GET['doctorId'];

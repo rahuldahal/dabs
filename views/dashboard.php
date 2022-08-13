@@ -3,9 +3,14 @@ include(dirname(__DIR__) . "/includes/connection.php");
 include(dirname(__DIR__) . "/timeSlot.php");
 include(dirname(__DIR__) . "/includes/header.php");
 session_start();
-if (count($_SESSION) == 0) {
+// if (count($_SESSION) == 0) {
+//   header('Location: /dabs/index.php');
+//   exit();
+// }
+if(!isset($_SESSION['role'])){
   header('Location: /dabs/index.php');
-  exit();
+}else if($_SESSION['role']!= "patient"){
+  header('Location: /dabs/index.php');
 }
 ?>
 
@@ -55,6 +60,7 @@ if ($numRows > 0) {
           $doctorData= array(); 
           $appointments= array();
           $appointmentId;
+          $doctorId;
           $appointmentStatus;
           $i = 0;
 
@@ -70,8 +76,8 @@ if ($numRows > 0) {
           if($numRows > 0){
             // fetching all appointments made by user
               while($row = mysqli_fetch_assoc($resultSet)){
-                  $appointmentId = $row['appointmentId'];
-                  $appointmentStatus = $row['status'];
+                  // $appointmentId = $row['appointmentId'];
+                  // $appointmentStatus = $row['status'];
                   array_push($appointments, $row);
               }
           }
@@ -98,8 +104,8 @@ if ($numRows > 0) {
               $availabilityTime = $row['availabilityTime'];
               }
             }
-          // // echo $availabilityTime;
-          // // exit();
+          // echo $availabilityTime;
+          // exit();
 
           $time = getTime($availabilityTime);
           $slots = getSlots($time); // array of slots
@@ -128,7 +134,8 @@ if ($numRows > 0) {
           </tr>";
 
     for($i=0 ; $i < $count ; $i++){
-
+        $appointmentId = $appointments[$i]['appointmentId'];
+        $appointmentStatus = $appointments[$i]['status'];
         $fullName = $doctorData[$i]['firstName']." ".$doctorData[$i]['middleName']." ".$doctorData[$i]['lastName']; 
         echo "<tr>";
         echo "<td style=\"text-transform:capitalize;\">".  $fullName;
@@ -145,21 +152,26 @@ if ($numRows > 0) {
         echo "</td>";
         echo "<td>".  $appointments[$i]['status']; 
         echo "</td>";
-        echo "<td>
-                <form action='../auth/cancelAppointment.php'>
-                <input type='hidden' name='appointmentId' value='$appointmentId' >
-                <button type='submit' name='cancelRequest' style='color:#000;'>Cancel</button>
-                </form>
+        echo "<td>".
+                // <form action=\"../auth/cancelAppointment.php\">
+                "<form action=\"addDoctor.php\">
+                <input type='hidden' name='appointmentId' value='$appointmentId' >";
+                if($appointmentStatus == "Cancelled" || $appointmentStatus == "Declined"){
+                  echo "<button type='submit' name='cancelRequest' style='color:#000;' disabled>Cancel</button>";
+                }else if($appointmentStatus == "Approved" || $appointmentStatus == "Pending"){
+                  echo "<button type='submit' name='cancelRequest' style='color:#000;'>Cancel</button>";
+                }
+        echo    "</form>
               </td>";
         echo "<tr>";
     }
     echo "</table>";
-
   }
 // exit();
-?> 
+?>
       </div>
     </div>
+    
     <div class="tab-2">
       <label for="tab2-2" class="tabLabel">New</label>
       <input id="tab2-2" name="tabs-two" type="radio">
@@ -218,61 +230,11 @@ if ($numRows > 0) {
 
           <input type="submit" name="appointmentDetails" value="Get Appointment">
         </form>
-        <!-- <table>
-        <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Specialization</th>
-        <th>Degree</th>
-        <th>Available Time</th>
-        </tr>
-
-
-// $sql = "SELECT * FROM (user INNER JOIN doctor ON user.userId = doctor.userId);";
-// $resultSet = mysqli_query($conn, $sql);
-// $numRows = mysqli_num_rows($resultSet);
-// if($numRows > 0){
-//     $data= array();
-//     while($row = mysqli_fetch_assoc($resultSet)){
-//         // array_push($data, $row);
-//         echo "<tr>";
-// 			// echo "<td>".$row['doctor_id']."</td>";
-// 			echo "<td>".$row['firstName']."</td>";								
-// 			echo "<td>".$row['lastName']."</td>";
-// 			echo "<td>".$row['specialization']."</td>";
-// 			echo "<td>".$row['degree']."</td>";
-// 			echo "<td>".$row['availabilityTime']."</td>";
-//       $doctorId = $row['doctorId'];
-								
-// 			// echo "<td>".$row['fee']."</td>";
-//             // echo "<td><button type='submit' name='submit' style='color:#000;' onclick='getAppointment()'>Get Appointment</button></td>";		
-//       echo "<td>
-//           <form action=\"../auth/createAppointment.php\" method=\"POST\">
-//           <input type=\"number\" hidden value=\"<?php $doctorId; ?>\">
-//           <button type=\"submit\" name=\"submit\" style=\"color:#000;\">Get Appointment</button>
-//           </form>
-//           </td>";
-//       echo "</tr>";
-//     }
-// }
-?>
-
-</table> -->
       </div>
     </div>
   </div>
-  </form>
+  <!-- </form> -->
 
   <script src="/dabs/js/doctorInfo.js"></script>
-  <script src="/dabs/js/dateInfo.js"></script>
 
-  <!-- <th>First Name</th>
-              <th>Middle Name</th>
-              <th>Last Name</th> -->
 
-              <!-- echo "<td>".  $doctorData[$i]['firstName']; 
-        echo "</td>";
-        echo "<td>".  $doctorData[$i]['middleName']; 
-        echo "</td>";
-        echo "<td>".  $doctorData[$i]['lastName']; 
-        echo "</td>"; -->

@@ -61,12 +61,17 @@ if($numRows > 0){
         
         // echo "<td>".$row['fee']."</td>";
         echo "<td> 
-            <form action=\"updateAppointmentStatus.php\">
-             <input type='hidden' name='appointmentId' value='$appointmentId' >
-             <input type='hidden' name='appointmentStatus' value='$appointmentStatus' >
-             <button type='submit' name='submit' value='approve' style='color:#000;'>Approve</button>
-            <button type='submit' name='submit' value='decline' style='color:#000;'>Decline</button>
-            </form>
+            <form action=\"../admin/updateAppointmentStatus.php\">
+              <input type='hidden' name='appointmentId' value='$appointmentId' >
+              <input type='hidden' name='appointmentStatus' value='$appointmentStatus' >";
+                if($appointmentStatus != "Pending" ){
+                  echo "<button type='submit' name='submit' value='approve' style='color:#000;' disabled>Approve</button>
+                  <button type='submit' name='submit' value='decline' style='color:#000;' disabled>Decline</button>";
+                } else{
+                  echo "<button type='submit' name='submit' value='approve' style='color:#000;'>Approve</button>
+                  <button type='submit' name='submit' value='decline' style='color:#000;'>Decline</button>";
+                }
+       echo "</form>
             </td>";	
         // <input type=\"submit\" name=\"doctorUpdateDetails\" value=\"Update\" />	
 		echo "</tr>";

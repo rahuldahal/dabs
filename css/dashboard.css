@@ -178,3 +178,12 @@ nav a:hover{
   margin-left: 15px;
   /* text-align: center; */
 }
+
+.formField{
+  margin: auto;
+  margin-bottom: 0px;
+}
+
+.doctorDetails{
+  margin-bottom: 5px;
+}

@@ -5,6 +5,9 @@ session_start();
 if(count($_SESSION)==0){
     header('Location: /dabs/admin.php');
     exit();
+  }else if($_SESSION['email']!= "admin123@gmail.com"){
+    header('Location: /dabs/admin.php');
+    exit();
   }
 
   if(!isset($_GET['submit'])){
@@ -15,7 +18,7 @@ if(count($_SESSION)==0){
   $appointmentStatus= $_GET['appointmentStatus'];
   echo $appointmentId;
   echo $appointmentStatus;
-
+  exit();
   $status;
 
   if($_GET['submit'] == "approve" ){

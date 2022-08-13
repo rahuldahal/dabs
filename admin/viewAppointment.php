@@ -5,6 +5,9 @@ session_start();
 if(count($_SESSION)==0){
     header('Location: /dabs/admin.php');
     exit();
+  }else if($_SESSION['email']!= "admin123@gmail.com"){
+    header('Location: /dabs/admin.php');
+    exit();
   }
 ?>
 
@@ -42,17 +45,17 @@ if($numRows > 0){
         echo "<td>".$row['appointmentId']."<td/>";
         echo "<td>".$row['reason']."</td>";
         echo "<td>".$row['date']."</td>";
-        echo "<td>".$row['time']."</td>";
+        echo "<td>".$row['timeSlot']."</td>";
         echo "<td>".$row['token']."</td>";
         echo "<td>".$row['status']."</td>"; 
         
         // echo "<td>".$row['fee']."</td>";
         echo "<td> 
             <form action=\"updateAppointmentStatus.php\">
-             <input type='hidden' name='appointmentId' value='$appointmentId' >
-             <input type='hidden' name='appointmentStatus' value='$appointmentStatus' >
-             <button type='submit' name='submit' value='approve' style='color:#000;'>Approve</button>
-            <button type='submit' name='submit' value='decline' style='color:#000;'>Decline</button>
+                <input type='hidden' name='appointmentId' value='$appointmentId' >
+                <input type='hidden' id='appointmentStatus' name='appointmentStatus' value='$appointmentStatus' >
+                <button type='submit' id='updateToApproved' name='submit' value='approve' style='color:#000;'>Approve</button>
+                <button type='submit' id='updateToDeclined' name='submit' value='decline' style='color:#000;'>Decline</button>
             </form>
             </td>";	
         // <input type=\"submit\" name=\"doctorUpdateDetails\" value=\"Update\" />	
@@ -62,3 +65,5 @@ if($numRows > 0){
 ?>
 
 </table>
+
+<script src="/dabs/js/appointmentStatus.js"></script>

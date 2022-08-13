@@ -150,22 +150,22 @@ $bloodGroup= $patientsDetails['bloodGroup'];
 $password= $patientsDetails['password'];
 $hashedPassword = md5($password);
 $address = $patientsDetails['address'];
-$contact = $patientsDetails['phone'];
+$contact = $patientsDetails['telephone'];
 $role= "patient";
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
 
 
-$sql= "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, dob, gender, maritalStatus, role, address, phone, photo) VALUES ('$firstName',
+$sql= "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, dob, gender, maritalStatus, role, address, telephone, photo) VALUES ('$firstName',
 '$middleName', '$lastName', '$email', '$hashedPassword', '$bloodGroup', '$dob', '$gender', '$maritalStatus', '$role', '$address', '$phone', '$photo')";
 $resultSet= mysqli_query($conn, $sql);
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows>0){
     echo "Successfully Inserted";
-    // $userDetails = ["firstName" => $firstName, "email" => $email];
-    // $_SESSION['userDetails']= $userDetails;
-    // header('Location: /dabs/views/dashboard.php');
-    // exit();
+    $userDetails = ["firstName" => $firstName, "email" => $email, "role" => $role];
+    $_SESSION['userDetails']= $userDetails;
+    header('Location: /dabs/views/dashboard.php');
+    exit();
 }
 
 mysqli_close($conn);

@@ -1,13 +1,8 @@
 (() => {
-  //   const specializationOptions = Array.from(
-  //     document.querySelectorAll("#specialization option")
-  //   );
-  //   const specializations = specializationOptions.map((option) => option.value);
-
-  //   console.log(specializations);
-
   const specializationElement = document.querySelector("#specialization");
   const dateElement = document.querySelector("#date"); // TODO: handle onChange here as well!
+  const doctorElement = document.querySelector("#doctor");
+
   specializationElement.addEventListener("change", (e) =>
     handleSpecializationChange(e.currentTarget)
   );
@@ -78,4 +73,19 @@
 
     doctorSelectionElement.removeAttribute("disabled");
   }
+
+  doctorElement.addEventListener('change', async e=>{
+    const { value:doctorId } = e;
+
+    try {
+      const res = await fetch(
+        `/dabs/api/timeSlots.php?doctorId=${doctorId}`
+      );
+      const timeSlots = await res.json();
+      console.log(timeSlots);
+
+    } catch (error) {
+      console.log(error);
+    }
+  })
 })();

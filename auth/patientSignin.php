@@ -32,6 +32,7 @@ if($numRows>0){
     $_SESSION['userId']= $row['userId'];
     $_SESSION['firstName']= $row['firstName'];
     $_SESSION['email']= $email;
+    $_SESSION['role']= $row['role'];
     header('Location: /dabs/views/dashboard.php');
     exit();
 }

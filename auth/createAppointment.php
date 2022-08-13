@@ -103,7 +103,7 @@ if($numRows > 0){
     // print_r($token);
 }
 
-// $sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId' AND status <> 'Cancelled';";
+// $sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId' AND status = 'Pending' OR status = 'Approved';";
 // $resultSet = mysqli_query($conn, $sql);
 // $numRows = mysqli_num_rows($resultSet);
 // $slotsBooked = array();

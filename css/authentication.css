@@ -40,7 +40,7 @@ label {
   transition: 0.5s ease-in-out;
 }
 
-input {
+ input {
   width: 100%;
   background: #e0dede;
   justify-content: center;
@@ -50,9 +50,13 @@ input {
   border: none;
   outline: none;
   border-radius: 5px;
+} 
+
+#tab2-1, #tab2-2{
+  padding: 0px;
 }
 
-.signup {
+/* .signup {
   background: #eee;
   border-radius: 60% / 10%;
   transform: translateY(-180px);
@@ -76,4 +80,4 @@ input {
 
 #chk:checked ~ .signin label {
   transform: scale(0.6);
-}
+} */
