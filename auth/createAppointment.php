@@ -1,10 +1,10 @@
 <?php
-// include(dirname(__DIR__).'/includes/connection.php');
-include(dirname(__DIR__).'/constants/db.php');
-include(dirname(__DIR__).'/constants/enums.php');
-include(dirname(__DIR__).'/constants/regex.php');
-include(dirname(__DIR__).'/constants/validation.php');
-include(dirname(__DIR__).'/fetchTimeSlot.php');
+include('../includes/connection.php');
+include('../constants/db.php');
+include('../constants/enums.php');
+include('../constants/regex.php');
+include('../constants/validation.php');
+// include('../fetchTimeSlot.php');
 
 session_start();
 
