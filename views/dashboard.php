@@ -180,12 +180,8 @@ if ($numRows > 0) {
           <div class="appointmentFormFields">
             <div class="doctorDetails">
               
+              
               <div class="formField">
-                <label for="date">Date</label>
-                <input type="date" name="date" id="date" />
-              </div>
-
-            <div class="formField">
                 <label for="specialization">Doctor's Specialization</label>
                 <select name="specialization" id="specialization">
                   <option value="">Select from dropdown</option>
@@ -196,14 +192,18 @@ if ($numRows > 0) {
                   ?>
                 </select>
               </div>
-
+              
               <div class="formField">
                 <label for="doctor">Doctor</label>
                 <select disabled name="doctorId" id="doctor">
                   <option value="">Select The Doctor</option>
                 </select>
               </div>
-
+              
+              <div class="formField">
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date" />
+              </div>
 
               <div class="formField">
                 <label for="slot">Available Time Slot</label>

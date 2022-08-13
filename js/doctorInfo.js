@@ -4,17 +4,15 @@
   const doctorElement = document.querySelector("#doctor");
 
   specializationElement.addEventListener("change", (e) =>
-    handleSpecializationChange(e.currentTarget)
+    handleSpecializationChange(e.currentTarget) 
   );
 
-  async function handleSpecializationChange(e) {
-    const { value } = e;
-    const { value: date } = dateElement;
+dateElement.addEventListener("change", e => 
+  handleDateChange(e.currentTarget)
+);
 
-    const { error } = validateDate(date);
-    if (error) {
-      return alert(error); // TODO: implement flash message :D
-    }
+  async function handleSpecializationChange(specializationElement) {
+    const { value } = specializationElement;
 
     try {
       const res = await fetch(
@@ -49,6 +47,15 @@
 
     return {};
   }
+
+  function handleDateChange(dateElement){ 
+    const { value: date } = dateElement;
+
+    const { error } = validateDate(date);
+    if (error) {
+      return alert(error); // TODO: implement flash message :D
+    }
+   }
 
   function populateDoctorSelection(doctors) {
     if (doctors.length === 0) {
@@ -89,3 +96,4 @@
     }
   })
 })();
+
