@@ -51,7 +51,7 @@ if ($numRows > 0) {
     <div class="tab-2">
       <label for="tab2-1" class="tabLabel">Appointments</label>
       <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-      <div>
+      <div id="bookedAppointments">
         <h4>Appointments you've booked</h4>
 
         <?php
@@ -152,9 +152,8 @@ if ($numRows > 0) {
         echo "</td>";
         echo "<td>".  $appointments[$i]['status']; 
         echo "</td>";
-        echo "<td>".
-                // <form action=\"../auth/cancelAppointment.php\">
-                "<form action=\"addDoctor.php\">
+        echo "<td>
+                 <form action=\"../auth/cancelAppointment.php\">
                 <input type='hidden' name='appointmentId' value='$appointmentId' >";
                 if($appointmentStatus == "Cancelled" || $appointmentStatus == "Declined"){
                   echo "<button type='submit' name='cancelRequest' style='color:#000;' disabled>Cancel</button>";

@@ -14,5 +14,7 @@ $sql = "UPDATE appointment SET status = '$status' WHERE appointmentId= '$appoint
   $resultSet= mysqli_query($conn, $sql);
           $affectedRows= mysqli_affected_rows($conn);
           if($affectedRows > 0){
-              echo " Appointment Cancled";
+            //   echo " Appointment Canclled";
+            header('Location: /dabs/views/dashboard.php');
+            exit();
           }

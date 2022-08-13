@@ -187,3 +187,8 @@ nav a:hover{
 .doctorDetails{
   margin-bottom: 5px;
 }
+
+#bookedAppointments{
+  position: relative;
+  z-index: 10;
+}
