@@ -26,15 +26,14 @@ if (!$isEmailValid) {
 }
 
 
-$sql= "SELECT * FROM admin WHERE email='$email' AND password='$hashedPassword'";
+$sql= "SELECT * FROM user WHERE email='$email' AND password='$hashedPassword'";
 $resultSet= mysqli_query($conn, $sql);
 $numRows= mysqli_num_rows($resultSet);
 if($numRows>0){
     $row = mysqli_fetch_assoc($resultSet);
-    print_r($row);
-    //$_SESSION['firstName']= $row['firstName'];
-    $_SESSION['email']= $email;
-    //echo $_SESSION['firstName'];
+    // $_SESSION['firstName']= $row['firstName'];
+    // $_SESSION['email']= $email;
+    $_SESSION['role']= $row['role'];
     header('Location: /dabs/views/adminDashboard.php');
     exit();
 }
