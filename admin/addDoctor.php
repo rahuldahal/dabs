@@ -6,16 +6,7 @@ include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
 include(dirname(__DIR__)."/includes/header.php");
 include(dirname(__DIR__)."/timeSlot.php");
-
-
-session_start();
-if(count($_SESSION)==0){
-    header('Location: /dabs/admin.php');
-    exit();
-}else if($_SESSION['email']!= "admin123@gmail.com"){
-    header('Location: /dabs/admin.php');
-    exit();
-  }
+include (dirname(__DIR__).'/includes/adminAuthentication');
 
 $errors = array();
 

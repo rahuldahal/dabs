@@ -1,14 +1,8 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__)."/includes/header.php");
-session_start();
-if(count($_SESSION)==0){
-    header('Location: /dabs/admin.php');
-    exit();
-  }else if($_SESSION['email']!= "admin123@gmail.com"){
-    header('Location: /dabs/admin.php');
-    exit();
-  }
+include(dirname(__DIR__)."/includes/adminHeader.php");
+include (dirname(__DIR__).'/includes/adminAuthentication');
 
   if(!isset($_GET['submit'])){
     die("Empty Data");
@@ -16,9 +10,6 @@ if(count($_SESSION)==0){
 
   $appointmentId= $_GET['appointmentId'];
   $appointmentStatus= $_GET['appointmentStatus'];
-  echo $appointmentId;
-  echo $appointmentStatus;
-  exit();
   $status;
 
   if($_GET['submit'] == "approve" ){
@@ -31,5 +22,5 @@ if(count($_SESSION)==0){
   $resultSet= mysqli_query($conn, $sql);
           $affectedRows= mysqli_affected_rows($conn);
           if($affectedRows > 0){
-              echo " Successfully Updated appointment";
+              header('Location: ../views/adminDashboard.php');
           }

@@ -1,14 +1,8 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__)."/includes/header.php");
-session_start();
-if(count($_SESSION)==0){
-    header('Location: /dabs/admin.php');
-    exit();
-}else if($_SESSION['email']!= "admin123@gmail.com"){
-    header('Location: /dabs/admin.php');
-    exit();
-  }
+include(dirname(__DIR__)."/includes/adminHeader.php");
+include (dirname(__DIR__).'/includes/adminAuthentication');
 ?>
 
 <html>
