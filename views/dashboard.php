@@ -177,6 +177,7 @@ if ($numRows > 0) {
       <div>
         <h4>Book a new appointment</h4>
         <form action="../auth/createAppointment.php" method="POST">
+          <input type="hidden" name="userId" value="<?php echo $_SESSION['userId'];?>">
           <div class="appointmentFormFields">
             <div class="doctorDetails">
               
@@ -207,15 +208,15 @@ if ($numRows > 0) {
 
               <div class="formField">
                 <label for="slot">Available Time Slot</label>
-                <select disabled name="slot" id="slot">
+                <select disabled name="timeSlot" id="slot">
                   <option value="">Select The Slot</option>
-                  <?php 
-                    for($i = 0 ; $i < count($slots) ; $i++){
-                      $slot =  $slots[$i];
-                      echo "<option value=\"$slot\">".$slot."</option>";
-                      echo " ";
-                  }
-                  ?>
+                  <!-- php  -->
+                    <!-- // for($i = 0 ; $i < count($slots) ; $i++){e
+                    //   $slot =  $slots[$i];
+                    //   echo "<option value=\"$slot\">".$slot."</option>";
+                    //   echo " ";
+                  // } -->
+                  <!-- ?> -->
                 </select>
               </div>
             </div>

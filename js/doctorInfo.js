@@ -1,7 +1,9 @@
 (() => {
   const specializationElement = document.querySelector("#specialization");
-  const dateElement = document.querySelector("#date"); // TODO: handle onChange here as well!
+  const dateElement = document.querySelector("#date");
   const doctorElement = document.querySelector("#doctor");
+  const slotSelectionElement = document.querySelector("#slot");
+  const reasonElement = document.querySelector("#reason");
 
   specializationElement.addEventListener("change", (e) =>
     handleSpecializationChange(e.currentTarget) 
@@ -48,12 +50,26 @@ dateElement.addEventListener("change", e =>
     return {};
   }
 
-  function handleDateChange(dateElement){ 
+  async function handleDateChange(dateElement){ 
     const { value: date } = dateElement;
 
     const { error } = validateDate(date);
     if (error) {
       return alert(error); // TODO: implement flash message :D
+    }
+
+    const { value:doctorId } = doctorElement;
+
+    try {
+      const res = await fetch(
+        `/dabs/api/timeSlots.php?doctorId=${doctorId}&date=${date}`
+      );
+      const timeSlots = await res.json();
+      console.log(timeSlots);
+      populateTimeSlots(timeSlots);
+
+    } catch (error) {
+      console.log(error);
     }
    }
 
@@ -64,8 +80,8 @@ dateElement.addEventListener("change", e =>
 
     const doctorSelectionElement = document.querySelector("#doctor");
 
-    const defaultOption = document.querySelector("#doctor option");
-    doctorSelectionElement.removeChild(defaultOption);
+    // const defaultOption = document.querySelector("#doctor option");
+    // doctorSelectionElement.removeChild(defaultOption);
 
     doctors.forEach((doctor) => {
       const { doctorId, firstName, middleName, lastName } = doctor;
@@ -81,19 +97,29 @@ dateElement.addEventListener("change", e =>
     doctorSelectionElement.removeAttribute("disabled");
   }
 
-  doctorElement.addEventListener('change', async e=>{
-    const { value:doctorId } = e;
-
-    try {
-      const res = await fetch(
-        `/dabs/api/timeSlots.php?doctorId=${doctorId}`
-      );
-      const timeSlots = await res.json();
-      console.log(timeSlots);
-
-    } catch (error) {
-      console.log(error);
+  function populateTimeSlots({availableSlots}) {
+    if (availableSlots.length === 0) {
+      return;
     }
+
+    const slotSelectionElement = document.querySelector("#slot");
+
+    // const defaultOption = document.querySelector("#slot option");
+    // slotSelectionElement.removeChild(defaultOption);
+
+    availableSlots.forEach((slot) => {
+      const optionElement = document.createElement("option"); 
+      optionElement.setAttribute("value", `${slot}`);
+      optionElement.innerText = `${slot}`;
+
+      slotSelectionElement.appendChild(optionElement);
+    });
+
+    slotSelectionElement.removeAttribute("disabled");
+  }
+  
+  slotSelectionElement.addEventListener('change', async e=>{
+    reasonElement.removeAttribute("disabled");    
   })
 })();
 

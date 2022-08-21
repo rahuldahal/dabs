@@ -11,7 +11,7 @@
         while($rows = mysqli_fetch_assoc($resultSet)){
             array_push($slotsBooked, $rows['timeSlot']); 
         }
-        print_r($slotsBooked);
+        // print_r($slotsBooked);
         // exit();
     }
 
