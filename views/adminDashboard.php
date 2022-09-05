@@ -1,7 +1,7 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__)."/includes/header.php");
-include (dirname(__DIR__).'/includes/adminAuthentication');
+include (dirname(__DIR__).'/includes/adminAuthentication.php');
 ?>
 
 <title>Admin Dashboard</title>
@@ -18,11 +18,18 @@ include (dirname(__DIR__).'/includes/adminAuthentication');
 
 <h1>Admin's Dashboard</h1>
 
+<form action="searchResult.php" method="GET">
+    <input class="searchField" type="text" name="search" placeholder="search"/>
+    <input class="searchFieldLabel" type="submit" value="search" name="submit" />
+</form>
+
 <h2 class="tableTitle">Appointments</h2>
     <table>
         <tr>
-            <th>UserId</th>
-            <th>DoctorId</th>
+            <!-- <th>UserId</th> -->
+            <th>Patient Name</th>
+            <!-- <th>DoctorId</th> -->
+            <th>Doctor</th>
             <th>AppointmentId</th>
             <th>Reason</th>
             <th>Date</th>
@@ -46,15 +53,33 @@ if($numRows > 0){
         $appointmentStatus = $row['status'];
         echo "<tr>";
         // echo "<td>".$row['doctor_id']."</td>";
-        echo "<td>".$row['userId']."</td>";
-        echo "<td>".$row['doctorId']."</td>";
+        $patientId = $row['userId'];
+        $forUserName = "SELECT firstName, middleName, lastName FROM user WHERE userId=$patientId";
+        $resultSet1 = mysqli_query($conn, $forUserName);
+          $numRows1 = mysqli_num_rows($resultSet1);
+          if($numRows1 > 0){
+            $name = mysqli_fetch_assoc($resultSet1);
+            echo "<td style=\"text-transform:capitalize;\">".$name['firstName']." ".$name['middleName']." ".$name['lastName']."</td>";
+          }
+
+        $doctorId = $row['doctorId'];
+        $forUserName = "SELECT firstName, middleName, lastName FROM (user INNER JOIN doctor ON user.userId = doctor.userId) WHERE doctorId=$doctorId;";
+        $resultSet1 = mysqli_query($conn, $forUserName);
+          $numRows1 = mysqli_num_rows($resultSet1);
+          if($numRows1 > 0){
+            $name = mysqli_fetch_assoc($resultSet1);
+            echo "<td style=\"text-transform:capitalize;\">".$name['firstName']." ".$name['middleName']." ".$name['lastName']."</td>";
+          }  
+
+        // echo "<td>".$row['userId']."</td>";
+
+        // echo "<td>".$row['doctorId']."</td>";
         echo "<td>".$row['appointmentId']."</td>";
         echo "<td>".$row['reason']."</td>";
         echo "<td>".$row['date']."</td>";
         echo "<td>".$row['timeSlot']."</td>";
         echo "<td>".$row['token']."</td>";
-        echo "<td>".$row['status']."</td>"; 
-        
+        echo "<td>".$row['status']."</td>";         
         // echo "<td>".$row['fee']."</td>";
         echo "<td> 
             <form action=\"../admin/updateAppointmentStatus.php\">
@@ -69,6 +94,7 @@ if($numRows > 0){
                 }
        echo "</form>
             </td>";	
+        // echo "<td> <button onclick= \"window.print();\"> Print </button></td>";
         // <input type=\"submit\" name=\"doctorUpdateDetails\" value=\"Update\" />	
 		echo "</tr>";
     }

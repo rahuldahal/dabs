@@ -9,9 +9,10 @@ include (dirname(__DIR__).'/includes/adminAuthentication');
 <h2 class= "tableTitle">Doctor Details</h2>
     <table>
         <tr>
-        <th>First Name</th>
+        <!-- <th>First Name</th>
         <th>Middle Name </th>
-        <th>Last Name</th>
+        <th>Last Name</th> -->
+        <th>Full Name</th>
         <th>Specialization</th>
         <th>Degree</th>
         <th>Available Time</th>
@@ -29,9 +30,10 @@ if($numRows > 0){
         // array_push($data, $row);
         echo "<tr>";
 			// echo "<td>".$row['doctor_id']."</td>";
-			echo "<td>".$row['firstName']."</td>";	
-			echo "<td>".$row['middleName']."</td>";							
-			echo "<td>".$row['lastName']."</td>";
+            echo "<td>".$row['firstName']." ".$row['middleName']." ".$row['lastName']."</td>";
+			// echo "<td>".$row['firstName']."</td>";	
+			// echo "<td>".$row['middleName']."</td>";							
+			// echo "<td>".$row['lastName']."</td>";
 			echo "<td>".$row['specialization']."</td>";
 			echo "<td>".$row['degree']."</td>";
 			echo "<td>".$row['availabilityTime']."</td>";

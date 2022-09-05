@@ -1,12 +1,16 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__)."/includes/header.php");
-include(dirname(__DIR__)."/includes/adminHeader.php");
-include (dirname(__DIR__).'/includes/adminAuthentication');
+// include(dirname(__DIR__)."/includes/adminHeader.php");
+include (dirname(__DIR__).'/includes/adminAuthentication.php');
 
 ?>
 
 <html>
+    <form action="viewAppointment.php" method="GET">
+        <input type="text" name="search" placeholder="search"/>
+    </form>
+
     <table>
         <tr>
             <th>UserId</th>
