@@ -17,9 +17,10 @@ $numRows = mysqli_num_rows($resultSet);
 $doctorDetails = array();
 
 if($numRows > 0){
-    while($row = mysqli_fetch_assoc($resultSet)){
-        array_push($doctorDetails, $row);
-    }
+    $doctorDetails = mysqli_fetch_assoc($resultSet);
+    // while($row = mysqli_fetch_assoc($resultSet)){
+    //     array_push($doctorDetails, $row);
+    // }
     // print_r($doctorDetails);
     // exit();
 }
@@ -41,48 +42,48 @@ if($numRows > 0){
                         <div class="steps">
                         <div data-step="one">
                             <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="Hari" value="<?php echo $doctorDetails[0]['firstName']; ?>" required />
+                            <input type="text" id="firstName" name="firstName" placeholder="Hari" value="<?php echo $doctorDetails['firstName']; ?>" required />
                             
                             <label for="middleName">Middle Name</label>
-                            <input type="text" id="middleName" name="middleName" placeholder="Prasad" value="<?php echo $doctorDetails[0]['middleName']; ?>" required />
+                            <input type="text" id="middleName" name="middleName" placeholder="Prasad" value="<?php echo $doctorDetails['middleName']; ?>" required />
 
                             <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Bastola" value="<?php echo $doctorDetails[0]['lastName']; ?>" required />
+                            <input type="text" id="lastName" name="lastName" placeholder="Bastola" value="<?php echo $doctorDetails['lastName']; ?>" required />
                         </div>
 
                         <div data-step="two">
                             <label for="gender">Gender</label>
-                            <select name="gender" id="gender" value="<?php echo $doctorDetails[0]['gender']; ?>">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="others">Others</option>
+                            <select name="gender" id="gender" >
+                                <option value="male" <?php if($doctorDetails['gender'] == "male") echo "selected"?>>Male</option>
+                                <option value="female" <?php if($doctorDetails['gender'] == "female") echo "selected"?>>Female</option>
+                                <option value="others" <?php if($doctorDetails['gender'] == "others") echo "selected"?>>Others</option>
                             </select>
                             <br/>
                             <br/>
 
                             <label for="dob">Date of Birth</label>
-                            <input type="date" name="dob" id="dob" value="<?php echo $doctorDetails[0]['dob']; ?>" />
+                            <input type="date" name="dob" id="dob" value="<?php echo $doctorDetails['dob']; ?>" />
                             <br/>
 
                             <label for="bloodGroup">Blood Group</label>
-                            <select name="bloodGroup" id="bloodGroup" value="<?php echo $doctorDetails[0]['bloodGroup']; ?>">
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
+                            <select name="bloodGroup" id="bloodGroup">
+                                <option value="A+" <?php if($doctorDetails['bloodGroup'] == "A+") echo "selected"?>>A+</option>
+                                <option value="A-" <?php if($doctorDetails['bloodGroup'] == "A-") echo "selected"?>>A-</option>
+                                <option value="B+" <?php if($doctorDetails['bloodGroup'] == "B+") echo "selected"?>>B+</option>
+                                <option value="B-" <?php if($doctorDetails['bloodGroup'] == "B-") echo "selected"?>>B-</option>
+                                <option value="O+" <?php if($doctorDetails['bloodGroup'] == "O+") echo "selected"?>>O+</option>
+                                <option value="O-" <?php if($doctorDetails['bloodGroup'] == "O-") echo "selected"?>>O-</option>
+                                <option value="AB+" <?php if($doctorDetails['bloodGroup'] == "AB+") echo "selected"?>>AB+</option>
+                                <option value="AB-" <?php if($doctorDetails['bloodGroup'] == "AB-") echo "selected"?>>AB-</option>
                             </select>
                             <br/>
                             <br/>
 
                             <label for="maritalStatus">Marital Status</label>
-                            <select name="maritalStatus" id="maritalStatus" value="<?php echo $doctorDetails[0]['maritalStatus']; ?>">
-                                <option value="single">single</option>
-                                <option value="married">married</option>
-                                <option value="divorced">divorced</option>
+                            <select name="maritalStatus" id="maritalStatus" value="<?php echo $doctorDetails['maritalStatus']; ?>">
+                                <option value="single" <?php if($doctorDetails['maritalStatus'] == "single") echo "selected"?>>single</option>
+                                <option value="married" <?php if($doctorDetails['maritalStatus'] == "married") echo "selected"?>>married</option>
+                                <option value="divorced" <?php if($doctorDetails['maritalStatus'] == "divorced") echo "selected"?>>divorced</option>
                             </select>    
                             <br/>
                             <br/>                        
@@ -90,40 +91,41 @@ if($numRows > 0){
                         
                         <div data-step="three">
                         <label for="specialization">Specialization</label>
-                            <select name="specialization" id="specialization" value="<?php echo $doctorDetails[0]['specialization']; ?>">
+                            <select name="specialization" id="specialization" value="<?php echo $doctorDetails['specialization']; ?>">
                                 //Pediatrician', 'Neurologist', 'Dermatologist', 'Anesthesiologist', 'Psychiatrist
-                                <option value="Pediatrician">Pediatrician</option>
-                                <option value="Neurologist">Neurologist</option>
-                                <option value="Dermatologist">Dermatologist</option>
-                                <option value="Anesthesiologist">Anesthesiologist</option>
-                                <option value="Psychiatrist">Psychiatrist</option>
+                                <option value="Pediatrician" <?php if($doctorDetails['specialization'] == "Pediatrician") echo "selected"?>>Pediatrician</option>
+                                <option value="Neurologist" <?php if($doctorDetails['specialization'] == "Neurologist") echo "selected"?>>Neurologist</option>
+                                <option value="Dermatologist" <?php if($doctorDetails['specialization'] == "Dermatologist") echo "selected"?>>Dermatologist</option>
+                                <option value="Anesthesiologist" <?php if($doctorDetails['specialization'] == "Anesthesiologist") echo "selected"?>>Anesthesiologist</option>
+                                <option value="Psychiatrist" <?php if($doctorDetails['specialization'] == "Psychiatrist") echo "selected"?>>Psychiatrist</option>
+                                <option value="Gynecologist" <?php if($doctorDetails['specialization'] == "Gynecologist") echo "selected"?>>Gynecologist</option>
                             </select>
                             <br/>
                             <br/>
 
                             <label for="degree">Degree</label>
-                            <select name="degree" id="degree" value="<?php echo $doctorDetails[0]['degree']; ?>">
-                                <option value="MBBS">MBBS</option>
-                                <option value="MD">MD</option>
-                                <option value="DM">DM</option>
-                                <option value="DNB">DNB</option>
+                            <select name="degree" id="degree" value="<?php echo $doctorDetails['degree']; ?>">
+                                <option value="MBBS" <?php if($doctorDetails['degree'] == "MMBS") echo "selected"?>>MBBS</option>
+                                <option value="MD" <?php if($doctorDetails['degree'] == "MD") echo "selected"?>>MD</option>
+                                <option value="DM" <?php if($doctorDetails['degree'] == "DM") echo "selected"?>>DM</option>
+                                <option value="DNB" <?php if($doctorDetails['degree'] == "DNB") echo "selected"?>>DNB</option>
                             </select>
                             <br/>
                             <br/>
 
                             <label for="availabilityTime">Available Time</label>
-                            <input type="text" id="availabilityTime" name="availabilityTime" placeholder="" value="<?php echo $doctorDetails[0]['availabilityTime']; ?>" required>
+                            <input type="text" id="availabilityTime" name="availabilityTime" placeholder="" value="<?php echo $doctorDetails['availabilityTime']; ?>" required>
                         </div>
 
                         <div data-step="four">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="name@domain.com" value="<?php echo $doctorDetails[0]['email']; ?>" required>
+                            <input type="email" id="email" name="email" placeholder="name@domain.com" value="<?php echo $doctorDetails['email']; ?>" required>
                         </div>
 
                         <div data-step="five">
 
                             <label for="status">Status</label>
-                            <input type="status" id="status" name="status" placeholder="status" value="<?php echo $doctorDetails[0]['status']; ?>" required />
+                            <input type="status" id="status" name="status" placeholder="status" value="<?php echo $doctorDetails['status']; ?>" required />
                         </div>
                         </div>
 
@@ -138,3 +140,9 @@ if($numRows > 0){
 			</div>
 </body>
 </html>
+
+<!-- <select name="gender" id="gender" value=" -->
+<?php 
+// echo $doctorDetails['gender']; 
+?>
+<!-- "> -->
