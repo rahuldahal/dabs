@@ -162,7 +162,15 @@ if ($numRows > 0) {
                 }
         echo    "</form>
               </td>";
-        echo "<tr>";
+              echo "<td>
+              <form action=\"download.php\">
+              <input type='hidden' name='appointmentId' value='$appointmentId' >
+              <input type='hidden' name='userId' value='$userId' >
+              <input type='submit' name='download' value='Download' >";
+              
+              echo    "</form>
+              </td>";
+              echo "</tr>";
     }
     echo "</table>";
   }
