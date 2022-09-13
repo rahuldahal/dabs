@@ -1,0 +1,17 @@
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--brand-400);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer p {
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: light;
+}

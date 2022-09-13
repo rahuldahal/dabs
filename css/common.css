@@ -4,6 +4,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  background-color: var(--white);
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1300px;
+  margin: auto;
+}
+
+.opacity-8 {
+  opacity: 0.8;
 }
 
 input[hidden] {

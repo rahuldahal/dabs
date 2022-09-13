@@ -1,10 +1,8 @@
 .main {
   width: 350px;
   height: 500px;
-  background: red;
   overflow: hidden;
-  background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
-    no-repeat center/ cover;
+  background: var(--brand-400);
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 }
@@ -40,7 +38,7 @@ label {
   transition: 0.5s ease-in-out;
 }
 
- input {
+input {
   width: 100%;
   background: #e0dede;
   justify-content: center;
@@ -50,41 +48,14 @@ label {
   border: none;
   outline: none;
   border-radius: 5px;
-} 
+}
 
-#tab2-1, #tab2-2{
+#tab2-1,
+#tab2-2 {
   padding: 0px;
 }
 
-/* .signup {
-  background: #eee;
-  border-radius: 60% / 10%;
-  transform: translateY(-180px);
-  transition: 0.8s ease-in-out;
-}
-
-.signup label {
-  color: #573b8a;
-  padding-top: 1.8rem;
-  transform: scale(0.6);
-}
-
-#chk:checked ~ .signup {
-  transform: translateY(-500px);
-}
-
-#chk:checked ~ .signup label {
-  transform: scale(1);
-  padding-top: 3rem;
-}
-
-#chk:checked ~ .signin label {
-  transform: scale(0.6);
-} */
-
-
-
-[data-message]::after{
+[data-message]::after {
   content: attr(data-message);
   color: red;
 }

@@ -1,4 +1,6 @@
+@import "variables.css";
 @import "common.css";
+@import "landing.css";
 @import "dashboard.css";
 @import "authentication.css";
-
+@import "footer.css";
