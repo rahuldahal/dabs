@@ -5,7 +5,7 @@ include(dirname(__DIR__).'/includes/connection.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Doctor's Appoint Booking Management System</title>
+	<title>Doctor's Appointment Booking Management System</title>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,500,700&display=swap" rel="stylesheet">
 </head>
@@ -19,6 +19,7 @@ include(dirname(__DIR__).'/includes/connection.php');
                         <div data-step="one">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" placeholder="Hari" required />
+                            <span class="message" data-message="Firstname should contain only alphabets"></span>
                             
                             <label for="middleName">Middle Name</label>
                             <input type="text" id="middleName" name="middleName" placeholder="Prasad" />

@@ -100,19 +100,23 @@ $isPasswordValid = isPasswordValid($patientsDetails['password']);
 // $isEmailUnique = isEmailUnique();
 
 if (!$isFirstNameValid) {
-    array_push($errors, array("firstName" => "First name " . $errorMessages['notAlpha']));
+    $errors["firstName"] = "First name ". $errorMessages['notAlpha'];
 }
 
 if (!$isMiddleNameValid) {
-    array_push($errors, array("middleName" => "Middle name " . $errorMessages['notAlpha']));
+    $errors["middleName"] = "Middle name ". $errorMessages['notAlpha'];
 }
 
 if (!$isLastNameValid) {
-    array_push($errors, array("lastName" => "Last name " . $errorMessages['notAlpha']));
+    // array_push($errors, array("lastName" => "Last name " . $errorMessages['notAlpha']));
+    $errors["lastName"] = "Last name ". $errorMessages['notAlpha'];
+
 }
 
 if (!$isEmailValid) {
-    array_push($errors, array("email" => "Email " . $errorMessages['notEmail']));
+    // array_push($errors, array("email" => "Email " . $errorMessages['notEmail']));
+    $errors["email"] = "Email " . $errorMessages['notEmail'];
+
 }
 
 // if(!$isEmailUnique){
@@ -124,27 +128,36 @@ $query = "SELECT email FROM user WHERE email= '$email';";
 $resultSet = mysqli_query($conn, $query);
 $emailExists = mysqli_num_rows($resultSet);
 if($emailExists > 0){
-    array_push($errors, array("email" => "Email " . $errorMessages['repeatedEmail']));
+    // array_push($errors, array("email" => "Email " . $errorMessages['repeatedEmail']));
+    $errors["email"] = "Email " . $errorMessages['repeatedEmail'];
 }
 
 if (!$isDOBValid) {
-    array_push($errors, array("dob" => "DOB " . $errorMessages['invalidDate']. " yyyy-mm-dd!"));
+    // array_push($errors, array("dob" => "DOB " . $errorMessages['invalidDate']. " yyyy-mm-dd!"));
+    $errors["dob"] = "DOB " . $errorMessages['invalidDate']. " yyyy-mm-dd!";
 }
 
 if (!$isGenderValid) {
-    array_push($errors, array("gender" => "Gender " . $errorMessages['notInEnum']));
+    // array_push($errors, array("gender" => "Gender " . $errorMessages['notInEnum']));
+    $errors["gender"] = "Gender " . $errorMessages['notInEnum'];
 }
 
 if (!$isMaritalStatusValid) {
-    array_push($errors, array("maritalStatus" => "Marital Status " . $errorMessages['notInEnum']));
+    // array_push($errors, array("maritalStatus" => "Marital Status " . $errorMessages['notInEnum']));
+    $errors["gender"] = "Gender " . $errorMessages['notInEnum'];
+
 }
 
 if (!$isBloodGroupValid) {
-    array_push($errors, array("gender" => "Blood Group " . $errorMessages['notInEnum']));
+    $errors["bloodGroup"] = "Blood Group " . $errorMessages['notInEnum'];
+
 }
 
 if (!$isPasswordValid) {
-    array_push($errors, array("password" => $errorMessages['weakPassword']));
+    // array_push($errors, array("password" => $errorMessages['weakPassword']));
+    $errors["password"] = "Password " . $errorMessages['weakPassword'];
+
+
 }
 
 
