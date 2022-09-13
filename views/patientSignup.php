@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('../includes/header.php');
 ?>
 </head>
@@ -13,15 +13,15 @@ include('../includes/header.php');
         <div class="steps">
           <div data-step="one">
             <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Hari" required />
+            <input type="text" id="firstName" name="firstName" value="Hari" required />
             <small class="message" data-message=""></small>
 
             <label for="middleName">Middle Name</label>
-            <input type="text" id="middleName" name="middleName" placeholder="Prasad" />
+            <input type="text" id="middleName" name="middleName" value="Prasad" />
             <small class="message" data-message=""></small>
 
             <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Bastola" required />
+            <input type="text" id="lastName" name="lastName" value="Bastola" required />
             <small class="message" data-message=""></small>
           </div>
 
@@ -62,21 +62,21 @@ include('../includes/header.php');
 
           <div data-step="three">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="name@domain.com" required>
+            <input type="email" id="email" name="email" value="name@domain.com" required>
             <small class="message" data-message=""></small>
 
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="password" required />
+            <input type="password" id="password" name="password" value="password" required />
             <small class="message" data-message=""></small>
           </div>
 
           <div data-step="four">
             <label for="address">Address</label>
-            <input type="address" id="address" name="address" placeholder="Biratnagar" required>
+            <input type="address" id="address" name="address" value="Biratnagar" required>
             <small class="message" data-message=""></small>
 
             <label for="telephone">Telephone</label>
-            <input type="tel" id="telephone" name="telephone" placeholder="telephone" required />
+            <input type="tel" id="telephone" name="telephone" value="telephone" required />
             <small class="message" data-message=""></small>
           </div>
         </div>
@@ -136,7 +136,26 @@ include('../includes/header.php');
         body: JSON.stringify(data)
       });
       const responseData = await res.json();
-      console.log(responseData);
+      const {
+        errors
+      } = responseData; // destructuring "errors" JSON response from the server
+
+      // show error message underneath the respective field
+      for (const key in errors) {
+        // select the corresponding sibling [data-message] element
+        const messageElement = document.querySelector(`[name="${key}"] + [data-message]`);
+        messageElement.dataset.message = errors[key];
+        messageElement.classList.add("shake");
+
+        // remove the error message when user starts to change the value
+        const errorMessageField = document.querySelector(`[name="${key}"]`);
+        errorMessageField.addEventListener('click', removeErrorMessage);
+
+        function removeErrorMessage(e) {
+          messageElement.dataset.message = "";
+          messageElement.classList.remove("shake");
+        }
+      }
     })
   </script>
 </body>
